@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Autofac;
 using CoolBlueTask.Products;
+using CoolBlueTask.SalesCombinations;
 using FluentAssertions;
 using Xunit;
 
@@ -37,11 +38,13 @@ namespace CoolBlueTask.Tests
         }
 
         [Fact]
-        public void service_registered()
+        public void services_registered()
         {
-            var service = container.Resolve<IProductService>();
+            var productService = container.Resolve<IProductService>();
+            var salesService = container.Resolve<ISalesCombinationService>();
             
-            service.Should().BeOfType<ProductService>();
+            productService.Should().BeOfType<ProductService>();
+            salesService.Should().BeOfType<SalesCombinationService>();
         }
 
         [Fact]

@@ -1,5 +1,6 @@
 ﻿
 using Autofac;
+using CoolBlueTask.SalesCombinations;
 
 namespace CoolBlueTask.Products
 {
@@ -13,6 +14,9 @@ namespace CoolBlueTask.Products
 
             builder.RegisterType<ProductService>()
                 .As<IProductService>();
+
+            builder.RegisterType<SalesCombinationService>()
+                .As<ISalesCombinationService>();
 
             builder.RegisterType<ProductController>()
                 .AsSelf();

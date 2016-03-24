@@ -108,6 +108,7 @@
     <Compile Include="ProductRepositoryIntegrationTests.cs" />
     <Compile Include="ProductsControllerTests\AddProduct.cs" />
     <Compile Include="ProductsControllerTests\GetProducts.cs" />
+    <Compile Include="ProductsControllerTests\GetProductSalesCombinations.cs" />
     <Compile Include="ProductsControllerTests\Search.cs" />
     <Compile Include="ProductServiceTests\AddProduct.cs" />
     <Compile Include="ProductServiceTests\GetAllProducts.cs" />

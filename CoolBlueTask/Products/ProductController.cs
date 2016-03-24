@@ -1,25 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 using CoolBlueTask.Products.Models;
+using CoolBlueTask.SalesCombinations;
 
 namespace CoolBlueTask.Products
 {
     [RoutePrefix("product")]
     public class ProductController : ApiController
     {
-        private readonly IProductService service;
+        private readonly IProductService productService;
+        private readonly ISalesCombinationService salesService;
 
         public ProductController(
-            IProductService service)
+            IProductService productService,
+            ISalesCombinationService salesService)
         {
-            this.service = service;
+            this.productService = productService;
+            this.salesService = salesService;
         }
 
         [HttpPost]
         [Route("")]
         public int AddProduct(ProductToAdd product)
         {
-            var result = service.AddProduct(product);
+            var result = productService.AddProduct(product);
             return (int)result;
         }
 
@@ -27,14 +31,21 @@ namespace CoolBlueTask.Products
         [Route("")]
         public IList<Product> GetProducts()
         {
-            return service.GetAllProducts();
+            return productService.GetAllProducts();
         }
 
         [HttpGet]
         [Route("{searchText}")]
         public IList<Product> Search(string searchText)
         {
-            return service.SearchProducts(searchText);
+            return productService.SearchProducts(searchText);
+        }
+
+        [HttpGet]
+        [Route("{productId}/salesCombinations")]
+        public IList<SalesCombination> GetProductSalesCombinations(string productId)
+        {
+            return salesService.GetByProduct(productId);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace CoolBlueTask.Products.Models
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
-        [DataMember(Name = "proce")]
+        [DataMember(Name = "price")]
         public decimal Price { get; set; }
     }
 }

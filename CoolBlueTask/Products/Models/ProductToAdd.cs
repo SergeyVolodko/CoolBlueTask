@@ -11,6 +11,9 @@ namespace CoolBlueTask.Products.Models
         [DataMember(Name = "description")]
         public string Description { get; set; }
 
+        [DataMember(Name = "price")]
+        public decimal Price { get; set; }
+
         public static implicit operator Product(ProductToAdd toAdd)
         {
             return new Product

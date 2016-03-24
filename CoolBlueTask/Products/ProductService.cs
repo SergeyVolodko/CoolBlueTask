@@ -8,6 +8,7 @@ namespace CoolBlueTask.Products
     {
         ProductResult AddProduct(ProductToAdd product);
         IList<Product> GetAllProducts();
+        IList<Product> SearchProducts(string searchText);
     }
 
     public class ProductService: IProductService
@@ -18,6 +19,11 @@ namespace CoolBlueTask.Products
         }
 
         public IList<Product> GetAllProducts()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<Product> SearchProducts(string searchText)
         {
             throw new NotImplementedException();
         }

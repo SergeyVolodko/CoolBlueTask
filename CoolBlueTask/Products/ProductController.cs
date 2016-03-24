@@ -29,5 +29,12 @@ namespace CoolBlueTask.Products
         {
             return service.GetAllProducts();
         }
+
+        [HttpGet]
+        [Route("{searchText}")]
+        public IList<Product> Search(string searchText)
+        {
+            return service.SearchProducts(searchText);
+        }
     }
 }

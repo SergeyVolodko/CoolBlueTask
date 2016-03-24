@@ -6,12 +6,18 @@ namespace CoolBlueTask
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            ConfigureRoutes(config);
 
-            // Web API routes
+
+        }
+
+        public static HttpConfiguration ConfigureRoutes(HttpConfiguration config)
+        {
             config.MapHttpAttributeRoutes();
 
             config.EnsureInitialized();
+
+            return config;
         }
     }
 }

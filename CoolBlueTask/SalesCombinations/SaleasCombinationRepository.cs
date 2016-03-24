@@ -12,9 +12,32 @@ namespace CoolBlueTask.SalesCombinations
 
     public class SaleasCombinationRepository: ISaleasCombinationRepository
     {
+        private IList<SalesCombination> storage;
+
+        public SaleasCombinationRepository()
+        {
+            storage = new List<SalesCombination>();
+
+            var id1 = Guid.Empty;
+            var id2 = Guid.NewGuid();
+            var sale = new SalesCombination
+            {
+                Products = new List<Guid> {id1, id2}
+            };
+
+            storage.Add(sale);
+        }
+
         public IList<SalesCombination> LoadByProduct(Guid productId)
         {
-            throw new NotImplementedException();
+            return storage.Where(c => c.Products.Contains(productId)).ToList();
+        }
+
+        public void Save(SalesCombination salesCombination)
+        {
+            salesCombination.Id = Guid.NewGuid();
+
+            storage.Add(salesCombination);
         }
     }
 }

@@ -101,6 +101,7 @@
     <Compile Include="Infrastructure\ControllerAutoDataAttribute.cs" />
     <Compile Include="Infrastructure\WebApi.cs" />
     <Compile Include="ProductsControllerTests\AddProduct.cs" />
+    <Compile Include="ProductsControllerTests\GetProducts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

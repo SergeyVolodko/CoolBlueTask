@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Web.Http;
 using CoolBlueTask.Products.Models;
 
 namespace CoolBlueTask.Products
@@ -20,6 +21,13 @@ namespace CoolBlueTask.Products
         {
             var result = service.AddProduct(product);
             return (int)result;
+        }
+
+        [HttpGet]
+        [Route("")]
+        public IList<Product> GetProducts()
+        {
+            return service.GetAllProducts();
         }
     }
 }

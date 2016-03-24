@@ -9,6 +9,7 @@ namespace CoolBlueTask.Products
     {
         void Save(Product product);
         IList<Product> LoadAll();
+        IList<Product> LoadByName(string searchText);
     }
 
     public class ProductRepository: IProductRepository
@@ -28,6 +29,11 @@ namespace CoolBlueTask.Products
         public IList<Product> LoadAll()
         {
             return null;
+        }
+
+        public IList<Product> LoadByName(string searchText)
+        {
+            throw new NotImplementedException();
         }
     }
 

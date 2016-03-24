@@ -46,7 +46,7 @@ namespace CoolBlueTask.Products
 
         public IList<Product> SearchProducts(string searchText)
         {
-            throw new NotImplementedException();
+            return productRepository.LoadByName(searchText);
         }
     }
     

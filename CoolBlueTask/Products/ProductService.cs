@@ -13,9 +13,31 @@ namespace CoolBlueTask.Products
 
     public class ProductService: IProductService
     {
+        private readonly IProductRepository productRepository;
+
+        public ProductService(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
+
         public ProductResult AddProduct(ProductToAdd product)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(product.Name))
+            {
+                return ProductResult.NameIsEmpty;
+            }
+
+            try
+            {
+                productRepository.Save((Product)product);
+            }
+            catch (Exception)
+            {
+                return ProductResult.Failed;
+            }
+            
+
+            return ProductResult.Ok;
         }
 
         public IList<Product> GetAllProducts()

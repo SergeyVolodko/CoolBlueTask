@@ -10,5 +10,6 @@ namespace CoolBlueTask.Products.Models
 
         public string Description { get; set; }
 
+
     }
 }

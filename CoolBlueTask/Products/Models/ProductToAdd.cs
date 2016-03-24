@@ -10,5 +10,14 @@ namespace CoolBlueTask.Products.Models
 
         [DataMember(Name = "description")]
         public string Description { get; set; }
+
+        public static implicit operator Product(ProductToAdd toAdd)
+        {
+            return new Product
+            {
+                Description = toAdd.Description,
+                Name = toAdd.Name
+            };
+        }
     }
 }

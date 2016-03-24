@@ -5,7 +5,12 @@ using CoolBlueTask.Products.Models;
 
 namespace CoolBlueTask.Products
 {
-    public class ProductRepository
+    public interface IProductRepository
+    {
+        void Save(Product product);
+    }
+
+    public class ProductRepository: IProductRepository
     {
         private string connectionString;
         public ProductRepository(string connectionString)
@@ -13,7 +18,7 @@ namespace CoolBlueTask.Products
             this.connectionString = connectionString;
         }
 
-        public  void Save(Product product)
+        public void Save(Product product)
         {
             
 
@@ -24,4 +29,6 @@ namespace CoolBlueTask.Products
             return null;
         }
     }
+
+   
 }

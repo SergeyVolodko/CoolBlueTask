@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.Tests.Infrastructure;
@@ -31,6 +27,37 @@ namespace CoolBlueTask.Tests
 
             // assert
             actual.ShouldBeEquivalentTo(expected);
+        }
+
+        [Theory]
+        [AutoNSubstituteData]
+        public void search(
+            ProductRepository sut,
+            Product product1,
+            Product product2,
+            Product product3,
+            string searchText,
+            string someDescription)
+        {
+            // setup
+            product1.Name = product1.Name + searchText;
+            product3.Description = "test" + searchText + someDescription;
+            var expected = new List<Product> { product1, product3 };
+
+            // act
+            sut.Save(product1);
+            sut.Save(product2);
+            sut.Save(product3);
+            var actual = sut.LoadByNameOrDescription(searchText);
+
+            // assert
+            actual.Count
+                .Should()
+                .Be(2);
+
+            actual.ShouldAllBeEquivalentTo(
+                expected, 
+                options=>options.Excluding(o=>o.Id));
         }
     }
 }

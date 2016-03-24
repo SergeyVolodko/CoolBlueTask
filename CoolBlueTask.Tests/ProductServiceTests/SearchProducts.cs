@@ -17,7 +17,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
     {
         [Theory]
         [AutoNSubstituteData]
-        public void calls_repository_load_by_name(
+        public void calls_repository_load_by_name_or_description(
             [Frozen] IProductRepository productRepo,
             ProductService sut,
             string searchText)
@@ -28,12 +28,12 @@ namespace CoolBlueTask.Tests.ProductServiceTests
             // assert
             productRepo
                 .Received()
-                .LoadByName(searchText);
+                .LoadByNameOrDescription(searchText);
         }
 
         [Theory]
         [AutoNSubstituteData]
-        public void returns_all_stored_products(
+        public void returns_all_found_products(
             [Frozen] IProductRepository productRepo,
             ProductService sut,
             List<Product> products,
@@ -41,7 +41,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
         {
             // setup
             productRepo
-                .LoadByName(searchText).Returns(products);
+                .LoadByNameOrDescription(searchText).Returns(products);
 
             // act
             var actual = sut.SearchProducts(searchText);

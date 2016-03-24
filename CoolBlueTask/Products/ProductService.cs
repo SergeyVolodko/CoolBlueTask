@@ -46,7 +46,7 @@ namespace CoolBlueTask.Products
 
         public IList<Product> SearchProducts(string searchText)
         {
-            return productRepository.LoadByName(searchText);
+            return productRepository.LoadByNameOrDescription(searchText);
         }
     }
     

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoolBlueTask.Products.Models;
 
 namespace CoolBlueTask.Products
@@ -8,7 +9,7 @@ namespace CoolBlueTask.Products
     {
         void Save(Product product);
         IList<Product> LoadAll();
-        IList<Product> LoadByName(string searchText);
+        IList<Product> LoadByNameOrDescription(string searchText);
     }
 
     public class ProductRepository: IProductRepository
@@ -24,6 +25,7 @@ namespace CoolBlueTask.Products
 
         public void Save(Product product)
         {
+            product.Id = Guid.NewGuid();
             storage.Add(product);
         }
 
@@ -32,11 +34,12 @@ namespace CoolBlueTask.Products
             return storage;
         }
 
-        public IList<Product> LoadByName(string searchText)
+        public IList<Product> LoadByNameOrDescription(string searchText)
         {
-            throw new NotImplementedException();
+            return storage.Where(
+                    p => p.Name.Contains(searchText)
+                         || p.Description.Contains(searchText)).ToList();
         }
     }
-
    
 }

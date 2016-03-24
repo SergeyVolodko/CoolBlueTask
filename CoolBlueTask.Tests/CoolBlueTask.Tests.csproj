@@ -100,6 +100,7 @@
     <Compile Include="AdHocTests.cs" />
     <Compile Include="Infrastructure\ControllerAutoDataAttribute.cs" />
     <Compile Include="Infrastructure\WebApi.cs" />
+    <Compile Include="ProductRepositoryIntegrationTests.cs" />
     <Compile Include="ProductsControllerTests\AddProduct.cs" />
     <Compile Include="ProductsControllerTests\GetProducts.cs" />
     <Compile Include="ProductsControllerTests\Search.cs" />

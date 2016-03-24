@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using CoolBlueTask.Products.Models;
 
 namespace CoolBlueTask.Products
@@ -14,21 +13,23 @@ namespace CoolBlueTask.Products
 
     public class ProductRepository: IProductRepository
     {
-        private string connectionString;
-        public ProductRepository(string connectionString)
+        private List<Product> storage;
+
+        //private string connectionString;
+        public ProductRepository(/*string connectionString*/)
         {
-            this.connectionString = connectionString;
+            //this.connectionString = connectionString;
+            storage = new List<Product>();
         }
 
         public void Save(Product product)
         {
-            
-
+            storage.Add(product);
         }
 
         public IList<Product> LoadAll()
         {
-            return null;
+            return storage;
         }
 
         public IList<Product> LoadByName(string searchText)

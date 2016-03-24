@@ -25,7 +25,7 @@ namespace CoolBlueTask.SalesCombinations
                 Products = new List<Guid> {id1, id2}
             };
 
-            storage.Add(sale);
+            Save(sale);
         }
 
         public IList<SalesCombination> LoadByProduct(Guid productId)

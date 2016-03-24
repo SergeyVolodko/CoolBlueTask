@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Products;
@@ -43,16 +44,38 @@ namespace CoolBlueTask.Tests.ProductsControllerTests
             // assert
             service.Received().GetByProduct(productId);
         }
+        
+        [Theory]
+        [ControllerAutoData]
+        public void throws_400_if_no_service_retuned_null(
+            [Frozen] ISalesCombinationService service,
+            ProductController sut,
+            string productId)
+        {
+            // arrange
+            service
+                .GetByProduct(productId)
+                .Returns(x=>null);
+
+            // act // assert
+            sut.Invoking(s => s.GetProductSalesCombinations(productId))
+                .ShouldThrow<HttpResponseException>()
+                .And
+                .Response.StatusCode
+                .Should()
+                .Be(HttpStatusCode.BadRequest);
+        }
+        
 
         [Theory]
         [ControllerAutoData]
-        public void returns_all_stored_sales(
+        public void returns_found_sales(
             [Frozen] ISalesCombinationService service,
             ProductController sut,
             IList<SalesCombination> sales,
             string productId)
         {
-            // setup
+            // arrange
             service
                 .GetByProduct(productId)
                 .Returns(sales);

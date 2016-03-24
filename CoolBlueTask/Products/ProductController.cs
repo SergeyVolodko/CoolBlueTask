@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations;
@@ -45,7 +46,16 @@ namespace CoolBlueTask.Products
         [Route("{productId}/salesCombinations")]
         public IList<SalesCombination> GetProductSalesCombinations(string productId)
         {
-            return salesService.GetByProduct(productId);
+            var sales = salesService
+                .GetByProduct(productId);
+
+            if (sales == null)
+            {
+                throw new HttpResponseException(
+                    HttpStatusCode.BadRequest);
+            }
+
+            return sales;
         }
     }
 }

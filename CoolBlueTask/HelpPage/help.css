@@ -1,0 +1,17 @@
+﻿.swagger-section .swagger-ui-wrap .info_title {
+    margin-left: 40% !important
+}
+
+.content{
+    border: 0px !important;
+    background-color: white !important;
+}
+
+.swagger-section .swagger-ui-wrap pre {
+    border: 1px solid lightgray !important;
+    background-color: ivory !important;
+}
+
+.heading {
+    /*background-color: white !important;*/
+}

@@ -15,6 +15,8 @@ namespace CoolBlueTask
             var config = new HttpConfiguration();
             config = WebApiConfig.ConfigureRoutes(config);
 
+            SwaggerConfig.Register(config);
+
             var builder = new ContainerBuilder();
 
             builder.RegisterModule(new ProductModule());

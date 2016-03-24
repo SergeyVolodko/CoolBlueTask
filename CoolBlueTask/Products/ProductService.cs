@@ -35,14 +35,13 @@ namespace CoolBlueTask.Products
             {
                 return ProductResult.Failed;
             }
-            
 
             return ProductResult.Ok;
         }
 
         public IList<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return productRepository.LoadAll();
         }
 
         public IList<Product> SearchProducts(string searchText)

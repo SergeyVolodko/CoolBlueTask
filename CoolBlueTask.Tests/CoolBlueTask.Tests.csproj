@@ -104,6 +104,7 @@
     <Compile Include="ProductsControllerTests\GetProducts.cs" />
     <Compile Include="ProductsControllerTests\Search.cs" />
     <Compile Include="ProductServiceTests\AddProduct.cs" />
+    <Compile Include="ProductServiceTests\GetAllProducts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

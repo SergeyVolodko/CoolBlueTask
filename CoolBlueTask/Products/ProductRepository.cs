@@ -8,6 +8,7 @@ namespace CoolBlueTask.Products
     public interface IProductRepository
     {
         void Save(Product product);
+        IList<Product> LoadAll();
     }
 
     public class ProductRepository: IProductRepository
@@ -24,7 +25,7 @@ namespace CoolBlueTask.Products
 
         }
 
-        public async Task<IList<Product>> LoadAll()
+        public IList<Product> LoadAll()
         {
             return null;
         }

@@ -135,6 +135,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="SalesCombinations\SaleasCombinationRepository.cs" />
     <Compile Include="SalesCombinations\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationService.cs" />
     <Compile Include="VersionController.cs" />

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
 using FluentAssertions;
@@ -23,18 +18,26 @@ namespace CoolBlueTask.Tests
         }
 
         [Fact]
-        public void repository_registered()
+        public void repositories_registered()
         {
-            var repository1 = container.Resolve<IProductRepository>();
-            var repository2 = container.Resolve<IProductRepository>();
+            var productRepo = container.Resolve<IProductRepository>();
+            var salesRepo = container.Resolve<ISaleasCombinationRepository>();
 
-            repository1.Should().BeOfType<ProductRepository>();
-            repository2.Should().BeOfType<ProductRepository>();
+            productRepo.Should().BeOfType<ProductRepository>();
+            salesRepo.Should().BeOfType<SaleasCombinationRepository>();
+        }
 
-            // repo is singletone
-            repository1
-                .Should()
-                .Be(repository2);
+        [Fact]
+        public void repositories_are_singletones()
+        {
+            var productRepo1 = container.Resolve<IProductRepository>();
+            var productRepo2 = container.Resolve<IProductRepository>();
+
+            var salesRepo1 = container.Resolve<ISaleasCombinationRepository>();
+            var salesRepo2 = container.Resolve<ISaleasCombinationRepository>();
+
+            productRepo1.Should().Be(productRepo2);
+            salesRepo1.Should().Be(salesRepo2);
         }
 
         [Fact]

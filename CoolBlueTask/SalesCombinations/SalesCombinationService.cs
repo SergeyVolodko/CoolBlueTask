@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace CoolBlueTask.SalesCombinations
 {
@@ -13,9 +11,25 @@ namespace CoolBlueTask.SalesCombinations
 
     public class SalesCombinationService : ISalesCombinationService
     {
-        public IList<SalesCombination> GetByProduct(string productId)
+        private readonly ISaleasCombinationRepository salesRepository;
+
+        public SalesCombinationService(
+            ISaleasCombinationRepository salesRepository)
         {
-            throw new NotImplementedException();
+            this.salesRepository = salesRepository;
+        }
+
+        public IList<SalesCombination> GetByProduct(
+            string productId)
+        {
+            Guid id;
+            if (!Guid.TryParse(productId, out id))
+            {
+                return null;
+            }
+
+            return salesRepository
+                .LoadByProduct(id);
         }
     }
 }

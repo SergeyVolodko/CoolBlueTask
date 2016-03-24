@@ -12,6 +12,10 @@ namespace CoolBlueTask.Products
                 .As<IProductRepository>()
                 .SingleInstance();
 
+            builder.RegisterType<SaleasCombinationRepository>()
+                .As<ISaleasCombinationRepository>()
+                .SingleInstance();
+
             builder.RegisterType<ProductService>()
                 .As<IProductService>();
 

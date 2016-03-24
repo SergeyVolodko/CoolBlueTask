@@ -1,13 +1,21 @@
-﻿using System;
-using Autofac.Core;
+﻿
+using Autofac;
 
 namespace CoolBlueTask.Products
 {
-    public class ProductModule: IModule
+    public class ProductModule: Module
     {
-        public void Configure(IComponentRegistry componentRegistry)
+        protected override void Load(ContainerBuilder builder)
         {
-            throw new NotImplementedException();
+            builder.RegisterType<ProductRepository>()
+                .As<IProductRepository>()
+                .SingleInstance();
+
+            builder.RegisterType<ProductService>()
+                .As<IProductService>();
+
+            builder.RegisterType<ProductController>()
+                .AsSelf();
         }
     }
 }

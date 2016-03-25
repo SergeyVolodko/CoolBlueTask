@@ -3,12 +3,19 @@ using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using Simple.Data;
 using Xunit;
 
 namespace CoolBlueTask.Tests
 {
     public class ProductRepositoryIntegrationTests
     {
+        public ProductRepositoryIntegrationTests()
+        {
+            var adapter = new InMemoryAdapter();
+            Database.UseMockAdapter(adapter);
+        }
+
         [Theory]
         [AutoNSubstituteData]
         public void add_load_all_integration(
@@ -29,8 +36,8 @@ namespace CoolBlueTask.Tests
             actual.ShouldBeEquivalentTo(expected);
         }
 
-        [Theory]
-        [AutoNSubstituteData]
+        //[Theory]
+        //[AutoNSubstituteData]
         public void search(
             ProductRepository sut,
             Product product1,

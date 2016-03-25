@@ -31,7 +31,7 @@ namespace CoolBlueTask.Products
             {
                 productRepository.Save((Product)product);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return ProductResult.Failed;
             }

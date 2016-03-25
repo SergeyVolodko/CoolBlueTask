@@ -7,7 +7,7 @@ namespace CoolBlueTask.Products.Models
     public class Product
     {
         [DataMember(Name = "id")]
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         [DataMember(Name = "name")]
         public string Name { get; set; }

@@ -43,9 +43,13 @@ namespace CoolBlueTask.Products
 
         public IList<Product> LoadByNameOrDescription(string searchText)
         {
-            return storage.Where(
-                    p => p.Name.Contains(searchText)
-                         || p.Description.Contains(searchText)).ToList();
+            var db = OpenDB();
+
+            var expr1 = db.Product.Name.Like("%"+ searchText+ "%");
+            var expr2 = db.Product.Description.Like("%" + searchText + "%");
+
+            return (List<Product>)OpenDB().Product
+                .FindAll(expr1 || expr2);
         }
     }
    

@@ -36,8 +36,8 @@ namespace CoolBlueTask.Tests
             actual.ShouldBeEquivalentTo(expected);
         }
 
-        //[Theory]
-        //[AutoNSubstituteData]
+        [Theory]
+        [AutoNSubstituteData]
         public void search(
             ProductRepository sut,
             Product product1,

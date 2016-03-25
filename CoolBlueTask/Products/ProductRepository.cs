@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
 using CoolBlueTask.Products.Models;
 using Simple.Data;
 
@@ -16,10 +14,8 @@ namespace CoolBlueTask.Products
 
     public class ProductRepository: IProductRepository
     {
-        private List<Product> storage;
-        
-
         private string connectionString;
+
         public ProductRepository(string connectionString = null)
         {
             this.connectionString = connectionString;
@@ -48,7 +44,7 @@ namespace CoolBlueTask.Products
             var expr1 = db.Product.Name.Like("%"+ searchText+ "%");
             var expr2 = db.Product.Description.Like("%" + searchText + "%");
 
-            return (List<Product>)OpenDB().Product
+            return (List<Product>)db.Product
                 .FindAll(expr1 || expr2);
         }
     }

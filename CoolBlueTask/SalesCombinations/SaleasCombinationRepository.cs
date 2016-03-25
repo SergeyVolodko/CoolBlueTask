@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Simple.Data;
 
 namespace CoolBlueTask.SalesCombinations
 {
@@ -12,32 +12,39 @@ namespace CoolBlueTask.SalesCombinations
 
     public class SaleasCombinationRepository: ISaleasCombinationRepository
     {
-        private IList<SalesCombination> storage;
+        private readonly string connectionString;
 
-        public SaleasCombinationRepository()
+        public SaleasCombinationRepository(string connectionString = null)
         {
-            storage = new List<SalesCombination>();
+            this.connectionString = connectionString;
+            //var id1 = Guid.Empty;
+            //var id2 = Guid.NewGuid();
+            //var sale = new SalesCombination
+            //{
+            //    Products = new List<Guid> {id1, id2}
+            //};
 
-            var id1 = Guid.Empty;
-            var id2 = Guid.NewGuid();
-            var sale = new SalesCombination
-            {
-                Products = new List<Guid> {id1, id2}
-            };
-
-            Save(sale);
+            //Save(sale);
         }
+
+        private dynamic OpenDB()
+        {
+            return Database.OpenFile(connectionString);
+        }
+
 
         public IList<SalesCombination> LoadByProduct(Guid productId)
         {
-            return storage.Where(c => c.Products.Contains(productId)).ToList();
+            var db = OpenDB();
+            var expr = db.SalesCombination.Products.Like("%" + productId + "%");
+            return (List<SalesCombination>)db.SalesCombination.FindAll(expr);
         }
 
         public void Save(SalesCombination salesCombination)
         {
-            salesCombination.Id = Guid.NewGuid();
+            salesCombination.Id = Guid.NewGuid().ToString();
 
-            storage.Add(salesCombination);
+            OpenDB().SalesCombination.Insert(salesCombination);
         }
     }
 }

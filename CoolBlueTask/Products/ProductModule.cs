@@ -15,6 +15,7 @@ namespace CoolBlueTask.Products
 
             builder.RegisterType<SaleasCombinationRepository>()
                 .As<ISaleasCombinationRepository>()
+                .WithParameter("connectionString", @"C:\temp\db\coolBlue.sqlite")
                 .SingleInstance();
 
             builder.RegisterType<ProductService>()

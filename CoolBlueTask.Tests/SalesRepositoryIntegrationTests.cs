@@ -2,12 +2,19 @@
 using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using Simple.Data;
 using Xunit;
 
 namespace CoolBlueTask.Tests
 {
     public class SalesRepositoryIntegrationTests
     {
+        public SalesRepositoryIntegrationTests()
+        {
+            var adapter = new InMemoryAdapter();
+            Database.UseMockAdapter(adapter);
+        }
+
         [Theory]
         [AutoNSubstituteData]
         public void add_load_by_product_id_integration(
@@ -18,8 +25,8 @@ namespace CoolBlueTask.Tests
             Guid productId)
         {
             // setup
-            comb1.Products.Add(productId);
-            comb3.Products.Add(productId);
+            comb1.Products = $"{comb1.Products}|{productId}|";
+            comb3.Products = $"{comb3.Products}|{productId}|";
 
             // act
             sut.Save(comb1);

@@ -19,6 +19,10 @@ namespace CoolBlueTask.Products
         public ProductRepository(string connectionString = null)
         {
             this.connectionString = connectionString;
+
+            // Mocking with in-memory DB;
+            var adapter = new InMemoryAdapter();
+            Database.UseMockAdapter(adapter);
         }
 
         private dynamic OpenDB()

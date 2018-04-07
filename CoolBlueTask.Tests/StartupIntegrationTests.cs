@@ -18,6 +18,10 @@ namespace CoolBlueTask.Tests
 		private readonly IContainer container;
 		private readonly Startup startup;
 
+		/// <summary>
+		/// To enable Startup testing
+		/// Remember to add Microsoft.Owin.Hosting Nuget
+		/// </summary>
 		public StartupIntegrationTests()
 		{
 			startup = new Startup();
@@ -31,14 +35,15 @@ namespace CoolBlueTask.Tests
 
 		[Theory]
 		[MemberData(nameof(AllControllers))]
-		public void controller_can_be_resolved(Type controllerType)
+		public void controller_can_be_resolved(
+			Type controllerType)
 		{
-			// arrange
+			// Arrange
 			Trace.WriteLine(controllerType.FullName);
 
-			// act // assert
+			// Act // Assert
 			container.IsRegistered(controllerType)
-				.Should().BeTrue(because: $"{controllerType.Name} failed to resolve");
+				.Should().BeTrue(because: $"{controllerType.Name} is not registered");
 
 			container.Resolve(controllerType)
 				.Should().NotBeNull();

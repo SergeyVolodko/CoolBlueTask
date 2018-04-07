@@ -23,20 +23,20 @@ namespace CoolBlueTask.Tests
 			container = startup.container;
 		}
 
-		public static IEnumerable<object[]> AllLeiaControllers = Assembly.GetAssembly(typeof(VersionController))
+		public static IEnumerable<object[]> AllControllers = Assembly.GetAssembly(typeof(VersionController))
 			.GetTypes().Where(t => t != typeof(ApiController) && typeof(ApiController).IsAssignableFrom(t))
 			.Select(c => new object[] { c });
 
 		[Theory]
-		[MemberData("AllLeiaControllers")]
-		public void controller_can_be_created(Type controllerType)
+		[MemberData(nameof(AllControllers))]
+		public void controller_can_be_resolved(Type controllerType)
 		{
 			// arrange
 			Trace.WriteLine(controllerType.FullName);
 
 			// act // assert
 			container.IsRegistered(controllerType)
-				.Should().BeTrue();
+				.Should().BeTrue(because: $"{controllerType.Name} failed to resolve");
 
 			container.Resolve(controllerType)
 				.Should().NotBeNull();

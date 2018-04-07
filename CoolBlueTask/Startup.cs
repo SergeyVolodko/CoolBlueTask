@@ -22,6 +22,7 @@ namespace CoolBlueTask
 			var builder = new ContainerBuilder();
 
 			builder.RegisterModule(new ProductModule());
+			builder.RegisterType<VersionController>();
 
 			container = builder.Build();
 

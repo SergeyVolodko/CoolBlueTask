@@ -10,6 +10,9 @@ namespace CoolBlueTask
 {
 	public class Startup
 	{
+		/// <summary>
+		/// Exposed for test purposes
+		/// </summary>
 		internal IContainer container;
 
 		public void Configuration(IAppBuilder app)
@@ -23,6 +26,9 @@ namespace CoolBlueTask
 
 			builder.RegisterModule(new ProductModule());
 			builder.RegisterType<VersionController>();
+
+			builder.RegisterType<ApiExceptionFilterAttribute>()
+				.AsWebApiExceptionFilterFor<ApiController>();
 
 			container = builder.Build();
 

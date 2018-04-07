@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using Autofac;
+using Autofac.Integration.WebApi;
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
@@ -15,10 +16,11 @@ namespace CoolBlueTask.Tests
 	public class StartupIntegrationTests
 	{
 		private readonly IContainer container;
+		private readonly Startup startup;
 
 		public StartupIntegrationTests()
 		{
-			var startup = new Startup();
+			startup = new Startup();
 			startup.Configuration(Substitute.For<IAppBuilder>());
 			container = startup.container;
 		}
@@ -40,6 +42,22 @@ namespace CoolBlueTask.Tests
 
 			container.Resolve(controllerType)
 				.Should().NotBeNull();
+		}
+
+		[Fact]
+		public void api_exception_filter_registered()
+		{
+			// Arrange
+
+			using (var scope = startup.container.BeginLifetimeScope("AutofacWebRequest"))
+			{
+
+				// Act
+				var actual = scope.Resolve<IAutofacExceptionFilter>();
+
+				// Assert
+				actual.Should().NotBeNull();
+			}
 		}
 	}
 }

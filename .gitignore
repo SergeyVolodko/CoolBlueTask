@@ -198,3 +198,5 @@ FakesAssemblies/
 # Nuget.exe for some reason refuses to be pushed.
 NuGet.exe
 /packages/
+*.ncrunchproject
+*.ncrunchsolution

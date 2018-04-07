@@ -1,4 +1,4 @@
-﻿using System.Web.Http;
+using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CoolBlueTask.Products;
@@ -8,24 +8,26 @@ using Owin;
 [assembly: OwinStartup(typeof(CoolBlueTask.Startup))]
 namespace CoolBlueTask
 {
-    public class Startup
-    {
-        public void Configuration(IAppBuilder app)
-        {
-            var config = new HttpConfiguration();
-            config = WebApiConfig.ConfigureRoutes(config);
+	public class Startup
+	{
+		internal IContainer container;
 
-            SwaggerConfig.Register(config);
+		public void Configuration(IAppBuilder app)
+		{
+			var config = new HttpConfiguration();
+			config = WebApiConfig.ConfigureRoutes(config);
 
-            var builder = new ContainerBuilder();
+			SwaggerConfig.Register(config);
 
-            builder.RegisterModule(new ProductModule());
+			var builder = new ContainerBuilder();
 
-            var container = builder.Build();
+			builder.RegisterModule(new ProductModule());
 
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+			container = builder.Build();
 
-            app.UseWebApi(config);
-        }
-    }
+			config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
+			app.UseWebApi(config);
+		}
+	}
 }

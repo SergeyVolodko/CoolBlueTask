@@ -53,11 +53,13 @@ namespace CoolBlueTask.Tests.Infrastructure
 			}
 		}
 
-		public static HttpActionExecutedContext MockContextWithException(Exception exception)
+		public static HttpActionExecutedContext MockContextWithException(
+			Exception exception,
+			string httpMethod = "Get")
 		{
 			var request = new HttpRequestMessage
 			{
-				Method = HttpMethod.Get,
+				Method = new HttpMethod(httpMethod),
 				RequestUri = new Uri($"http://localhost/test")
 			};
 			var actionContext = new HttpActionContext

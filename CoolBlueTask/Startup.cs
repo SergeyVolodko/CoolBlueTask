@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using CoolBlueTask.Products;
 using Microsoft.Owin;
+using NLog;
 using Owin;
 
 [assembly: OwinStartup(typeof(CoolBlueTask.Startup))]
@@ -23,6 +24,9 @@ namespace CoolBlueTask
 			SwaggerConfig.Register(config);
 
 			var builder = new ContainerBuilder();
+
+			builder.RegisterInstance(LogManager.GetCurrentClassLogger())
+				.As<ILogger>();
 
 			builder.RegisterModule(new ProductModule());
 			builder.RegisterType<VersionController>();

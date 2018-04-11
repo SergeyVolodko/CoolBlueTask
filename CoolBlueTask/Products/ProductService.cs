@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CoolBlueTask.Products.Models;
@@ -35,7 +34,6 @@ namespace CoolBlueTask.Products
 			var product = mapper.Map<ProductWriteDto, Product>(productToCreate);
 
 			var validationResult = validator.Validate(product);
-
 			if (!validationResult.IsValid)
 			{
 				throw new ValidationException(validationResult.Errors);
@@ -44,7 +42,6 @@ namespace CoolBlueTask.Products
 			var createdProduct = productRepository.Save(product);
 
 			var createdDto = mapper.Map<Product, ProductReadDto>(createdProduct);
-
 			return createdDto;
 		}
 
@@ -52,16 +49,18 @@ namespace CoolBlueTask.Products
 		{
 			var products = productRepository.LoadAll();
 
-			var dto = mapper.Map<IList<Product>, IList<ProductReadDto>>(products);
+			var dtos = mapper.Map<IList<Product>, IList<ProductReadDto>>(products);
 
-			return dto;
+			return dtos;
 		}
 
 		public IList<ProductReadDto> SearchByText(string searchText)
 		{
-			return null;
-			//return productRepository.LoadByNameOrDescription(searchText);
+			var products = productRepository.LoadByNameOrDescription(searchText);
+
+			var dtos = mapper.Map<IList<Product>, IList<ProductReadDto>>(products);
+
+			return dtos;
 		}
 	}
-
 }

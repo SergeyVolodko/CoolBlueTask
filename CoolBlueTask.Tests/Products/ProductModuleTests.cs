@@ -6,7 +6,7 @@ using FluentAssertions;
 using FluentValidation;
 using Xunit;
 
-namespace CoolBlueTask.Tests
+namespace CoolBlueTask.Tests.Products
 {
 	public class ProductModuleTests
 	{

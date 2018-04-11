@@ -4,6 +4,7 @@ using System.Net;
 using System.Web.Http;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using FluentValidation;
 using NSubstitute;
 using NLog;
 using Xunit;
@@ -86,8 +87,7 @@ namespace CoolBlueTask.Tests
 
 		public static IEnumerable<object[]> ErrorTypes()
 		{
-			//yield return new object[] { new ValidationException("error"), LogLevel.Warn };
-			//yield return new object[] { new ValidationErrorException("error"), LogLevel.Warn };
+			yield return new object[] { new ValidationException("error"), LogLevel.Warn };
 			//yield return new object[] { new NullReferenceException(), LogLevel.Error };
 			yield return new object[] { new DataBaseException(), LogLevel.Error };
 			yield return new object[] { new OutOfMemoryException("fatal"), LogLevel.Fatal };

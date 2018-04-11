@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -18,7 +18,7 @@ namespace CoolBlueTask.Tests.ProductsControllerTests
         public void routing()
         {
             // setup
-            var uri = @"http://localhost:12259/product/42/salesCombinations";
+            var uri = @"http://localhost:12259/products/42/salesCombinations";
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             var config = new HttpConfiguration();
 

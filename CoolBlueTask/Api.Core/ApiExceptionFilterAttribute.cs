@@ -7,6 +7,7 @@ using Autofac.Integration.WebApi;
 using NLog;
 using System.Linq;
 using System.Text;
+using FluentValidation;
 
 namespace CoolBlueTask
 {
@@ -54,13 +55,10 @@ namespace CoolBlueTask
 				};
 
 			var warningExceptions =
-				new string[]
+				new[]
 				{
 					//nameof(EntityNotFoundWarningException),
-					//nameof(UnauthorizedAccessException),
-					//nameof(ValidationException),
-					//nameof(ValidationErrorException),
-					//nameof(SubscriptionRequiredException)
+					nameof(ValidationException)
 				};
 
 			var logMessage = ErrorFormatter.FormatMessage(

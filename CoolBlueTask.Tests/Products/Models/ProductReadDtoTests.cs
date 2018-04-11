@@ -3,7 +3,9 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using ApprovalTests.Writers;
 using CoolBlueTask.Products.Models;
+using CoolBlueTask.Tests.Infrastructure;
 using Newtonsoft.Json;
+using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
 namespace CoolBlueTask.Tests.Products.Models
@@ -31,5 +33,6 @@ namespace CoolBlueTask.Tests.Products.Models
 
 			Approvals.Verify(writer);
 		}
+
 	}
 }

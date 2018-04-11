@@ -8,15 +8,15 @@ using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
-namespace CoolBlueTask.Tests.ProductsControllerTests
+namespace CoolBlueTask.Tests.Products.Controller
 {
 	public class CreateProduct
 	{
 		[Fact]
-		public void create_product_routing()
+		public void routing_create_products()
 		{
 			// Arrange
-			var uri = @"http://localhost:12259/product";
+			var uri = @"http://localhost:4242/products";
 			var request = new HttpRequestMessage(HttpMethod.Post, uri);
 			var config = new HttpConfiguration();
 
@@ -51,16 +51,16 @@ namespace CoolBlueTask.Tests.ProductsControllerTests
 			ProductWriteDto product,
 			ProductReadDto createdProduct)
 		{
-			//// Arrange
-			//service
-			//	.CreateProduct(product)
-			//	.Returns(createdProduct);
+			// Arrange
+			service
+				.CreateProduct(product)
+				.Returns(createdProduct);
 
-			//// Act
-			//var actual = sut.CreateProduct(product);
+			// Act
+			var actual = sut.CreateProduct(product);
 
-			//// Asserts
-			//actual.ShouldBeEquivalentTo(createdProduct);
+			// Asserts
+			actual.ShouldBeEquivalentTo(createdProduct);
 		}
 	}
 }

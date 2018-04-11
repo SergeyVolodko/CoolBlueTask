@@ -190,13 +190,14 @@
     <Compile Include="Infrastructure\WebApi.cs" />
     <Compile Include="ProductModuleTests.cs" />
     <Compile Include="ProductRepositoryIntegrationTests.cs" />
-    <Compile Include="ProductsControllerTests\CreateProduct.cs" />
-    <Compile Include="ProductsControllerTests\GetProducts.cs" />
+    <Compile Include="Products\Controller\CreateProduct.cs" />
+    <Compile Include="Products\Controller\GetAllProducts.cs" />
     <Compile Include="ProductsControllerTests\GetProductSalesCombinations.cs" />
-    <Compile Include="ProductsControllerTests\Search.cs" />
+    <Compile Include="Products\Controller\SearchProducts.cs" />
     <Compile Include="ProductServiceTests\AddProduct.cs" />
     <Compile Include="ProductServiceTests\GetAllProducts.cs" />
     <Compile Include="ProductServiceTests\SearchProducts.cs" />
+    <Compile Include="Products\Models\ProductWriteDtoTests.cs" />
     <Compile Include="Products\Models\ProductReadDtoTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesRepositoryIntegrationTests.cs" />
@@ -214,7 +215,10 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="test_files\product_dto.json">
+    <None Include="test_files\product_write_dto.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\product_read_dto.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

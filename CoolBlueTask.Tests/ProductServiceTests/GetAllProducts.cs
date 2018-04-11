@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.Tests.Infrastructure;
@@ -11,38 +11,38 @@ namespace CoolBlueTask.Tests.ProductServiceTests
 {
     public class GetAllProducts
     {
-        [Theory]
-        [AutoNSubstituteData]
-        public void calls_repository_load_all(
-            [Frozen] IProductRepository productRepo,
-            ProductService sut)
-        {
-            // act
-            sut.GetAllProducts();
+        //[Theory]
+        //[AutoNSubstituteData]
+        //public void calls_repository_load_all(
+        //    [Frozen] IProductRepository productRepo,
+        //    ProductService sut)
+        //{
+        //    // act
+        //    sut.GetAllProducts();
 
-            // assert
-            productRepo
-                .Received()
-                .LoadAll();
-        }
+        //    // assert
+        //    productRepo
+        //        .Received()
+        //        .LoadAll();
+        //}
 
-        [Theory]
-        [AutoNSubstituteData]
-        public void returns_all_stored_products(
-            [Frozen] IProductRepository productRepo,
-            ProductService sut,
-            List<Product> products)
-        {
-            // setup
-            productRepo
-                .LoadAll().Returns(products);
+        //[Theory]
+        //[AutoNSubstituteData]
+        //public void returns_all_stored_products(
+        //    [Frozen] IProductRepository productRepo,
+        //    ProductService sut,
+        //    List<Product> products)
+        //{
+        //    // setup
+        //    productRepo
+        //        .LoadAll().Returns(products);
             
-            // act
-            var actual = sut.GetAllProducts();
+        //    // act
+        //    var actual = sut.GetAllProducts();
 
-            // assert
-            actual
-                .ShouldBeEquivalentTo(products);
-        }
+        //    // assert
+        //    actual
+        //        .ShouldBeEquivalentTo(products);
+        //}
     }
 }

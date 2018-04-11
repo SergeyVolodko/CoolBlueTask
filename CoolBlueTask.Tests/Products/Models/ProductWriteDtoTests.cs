@@ -8,22 +8,22 @@ using Xunit;
 
 namespace CoolBlueTask.Tests.Products.Models
 {
-	public class ProductReadDtoTests
+	public class ProductWriteDtoTests
 	{
 		[Fact]
+		//[MethodImpl(MethodImplOptions.NoInlining)]
 		[UseReporter(typeof(DiffReporter))]
 		public void product_read_dto_approval()
 		{
-			var dto = new ProductReadDto
+			var dto = new ProductWriteDto
 			{
-				Id = "some-product-id",
-				Name = "The Product",
-				Description = "some description",
+				Name = "The new product",
+				Description = "some new description",
 				Price = 42
 			};
 
 			var expected =
-				Path.Combine(Consts.TestDataFolder, "product_read_dto.json");
+				Path.Combine(Consts.TestDataFolder, "product_write_dto.json");
 
 			var actual = JsonConvert.SerializeObject(dto, Formatting.Indented);
 

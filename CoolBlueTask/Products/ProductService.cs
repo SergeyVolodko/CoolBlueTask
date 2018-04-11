@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CoolBlueTask.Products.Models;
 
@@ -6,9 +6,9 @@ namespace CoolBlueTask.Products
 {
     public interface IProductService
     {
-        ProductResult CreateProduct(ProductWriteDto product);
-        IList<Product> GetAllProducts();
-        IList<Product> SearchProducts(string searchText);
+        ProductReadDto CreateProduct(ProductWriteDto product);
+        IList<ProductReadDto> GetAll();
+        IList<ProductReadDto> SearchByText(string searchText);
     }
 
     public class ProductService: IProductService
@@ -20,33 +20,30 @@ namespace CoolBlueTask.Products
             this.productRepository = productRepository;
         }
 
-        public ProductResult CreateProduct(ProductWriteDto product)
+        public ProductReadDto CreateProduct(ProductWriteDto product)
         {
-            if (string.IsNullOrWhiteSpace(product.Name))
-            {
-                return ProductResult.NameIsEmpty;
-            }
+            //if (string.IsNullOrWhiteSpace(product.Name))
+            //{
+            //    return ProductResult.NameIsEmpty;
+            //}
 
-            try
-            {
-                productRepository.Save((Product)product);
-            }
-            catch (Exception ex)
-            {
-                return ProductResult.Failed;
-            }
+			//var createdProduct = 
+			productRepository.Save((Product)product);
 
-            return ProductResult.Ok;
+			return null;
         }
 
-        public IList<Product> GetAllProducts()
+        public IList<ProductReadDto> GetAll()
         {
-            return productRepository.LoadAll();
+            productRepository.LoadAll();
+
+	        return null;
         }
 
-        public IList<Product> SearchProducts(string searchText)
+        public IList<ProductReadDto> SearchByText(string searchText)
         {
-            return productRepository.LoadByNameOrDescription(searchText);
+	        return null;
+            //return productRepository.LoadByNameOrDescription(searchText);
         }
     }
     

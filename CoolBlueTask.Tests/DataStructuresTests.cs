@@ -10,14 +10,14 @@ namespace CoolBlueTask.Tests
         [Theory]
         [AutoNSubstituteData]
         public void product_product_to_add_convertions(
-            ProductToAdd toAdd)
+            ProductWriteDto writeDto)
         {
             // act
-            var product = (Product) toAdd;
-            var actual = (ProductToAdd) product;
+            var product = (Product) writeDto;
+            var actual = (ProductWriteDto) product;
 
             // assert
-            actual.ShouldBeEquivalentTo(toAdd);
+            actual.ShouldBeEquivalentTo(writeDto);
         }
     }
 }

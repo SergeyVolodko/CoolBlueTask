@@ -1,0 +1,6 @@
+{
+  "id": "some-product-id",
+  "name": "The Product",
+  "description": "some description",
+  "price": 42.0
+}

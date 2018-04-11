@@ -22,9 +22,9 @@ namespace CoolBlueTask.Products
 
         [HttpPost]
         [Route("")]
-        public int AddProduct(ProductToAdd product)
+        public int CreateProduct(ProductWriteDto product)
         {
-            var result = productService.AddProduct(product);
+            var result = productService.CreateProduct(product);
             return (int)result;
         }
 

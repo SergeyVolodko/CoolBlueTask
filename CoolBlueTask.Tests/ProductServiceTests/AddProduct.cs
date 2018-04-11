@@ -17,10 +17,10 @@ namespace CoolBlueTask.Tests.ProductServiceTests
             ProductService sut)
         {
             // setup
-            var product = new ProductToAdd();
+            var product = new ProductWriteDto();
 
             // act // assert
-            sut.AddProduct(product)
+            sut.CreateProduct(product)
                 .Should()
                 .Be(ProductResult.NameIsEmpty);
         }
@@ -30,7 +30,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
         public void calls_repository_save(
             [Frozen] IProductRepository productRepo,
             ProductService sut,
-            ProductToAdd product)
+            ProductWriteDto product)
         {
             // arrange
             Product receivedArg = null;
@@ -38,7 +38,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
                 Arg.Do<Product>(a => { receivedArg = a; }));
 
             // act
-            sut.AddProduct(product);
+            sut.CreateProduct(product);
 
             // assert
             productRepo
@@ -54,7 +54,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
         public void saving_failed_return_500(
             [Frozen] IProductRepository productRepo,
             ProductService sut,
-            ProductToAdd product,
+            ProductWriteDto product,
             Exception ex)
         {
             // setup
@@ -63,7 +63,7 @@ namespace CoolBlueTask.Tests.ProductServiceTests
                 .Do(x=> { throw ex; });
 
             // act
-            var actual = sut.AddProduct(product);
+            var actual = sut.CreateProduct(product);
 
             // assert
             actual
@@ -74,10 +74,10 @@ namespace CoolBlueTask.Tests.ProductServiceTests
         [AutoNSubstituteData]
         public void happy_path(
             ProductService sut,
-            ProductToAdd product)
+            ProductWriteDto product)
         {
             // act // assert
-            sut.AddProduct(product)
+            sut.CreateProduct(product)
                 .Should()
                 .Be(ProductResult.Ok);
         }

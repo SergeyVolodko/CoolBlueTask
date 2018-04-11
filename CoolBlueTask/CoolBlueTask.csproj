@@ -84,8 +84,8 @@
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -175,12 +175,13 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataBaseException.cs" />
+    <Compile Include="Products\Models\ProductReadDto.cs" />
     <Compile Include="SalesCombinations\SaleasCombinationRepository.cs" />
     <Compile Include="SalesCombinations\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationService.cs" />
     <Compile Include="VersionController.cs" />
     <Compile Include="Products\Models\ProductResult.cs" />
-    <Compile Include="Products\Models\ProductToAdd.cs" />
+    <Compile Include="Products\Models\ProductWriteDto.cs" />
     <Compile Include="Products\Models\Product.cs" />
     <Compile Include="Products\ProductController.cs" />
     <Compile Include="Products\ProductModule.cs" />

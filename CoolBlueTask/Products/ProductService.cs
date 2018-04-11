@@ -6,7 +6,7 @@ namespace CoolBlueTask.Products
 {
     public interface IProductService
     {
-        ProductResult AddProduct(ProductToAdd product);
+        ProductResult CreateProduct(ProductWriteDto product);
         IList<Product> GetAllProducts();
         IList<Product> SearchProducts(string searchText);
     }
@@ -20,7 +20,7 @@ namespace CoolBlueTask.Products
             this.productRepository = productRepository;
         }
 
-        public ProductResult AddProduct(ProductToAdd product)
+        public ProductResult CreateProduct(ProductWriteDto product)
         {
             if (string.IsNullOrWhiteSpace(product.Name))
             {

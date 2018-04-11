@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 using FluentAssertions;
 using NLog;
 using NSubstitute;
@@ -48,6 +49,16 @@ namespace CoolBlueTask.Tests
 
 			container.Resolve(controllerType)
 				.Should().NotBeNull();
+		}
+
+		[Fact]
+		public void mapper_is_registered()
+		{
+			// Act
+			var actual = container.Resolve<IMapper>();
+
+			// Assert
+			actual.Should().NotBeNull();
 		}
 
 		[Fact]

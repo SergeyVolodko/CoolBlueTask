@@ -1,6 +1,7 @@
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using AutoMapper;
 using CoolBlueTask.Products;
 using Microsoft.Owin;
 using NLog;
@@ -25,9 +26,7 @@ namespace CoolBlueTask
 
 			var builder = new ContainerBuilder();
 
-			var logger = ApiLoggerFactory.CreateFileLogger();
-			builder.RegisterInstance(logger).As<ILogger>();
-
+			builder.RegisterModule(new DomainCoreModule());
 			builder.RegisterModule(new ProductModule());
 			builder.RegisterType<VersionController>();
 

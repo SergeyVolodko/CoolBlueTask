@@ -206,7 +206,7 @@
     <Compile Include="ProductsControllerTests\GetProductSalesCombinations.cs" />
     <Compile Include="Products\Controller\SearchProducts.cs" />
     <Compile Include="ProductServiceTests\AddProduct.cs" />
-    <Compile Include="ProductServiceTests\GetAllProducts.cs" />
+    <Compile Include="Products\Service\GetAllTests.cs" />
     <Compile Include="ProductServiceTests\SearchProducts.cs" />
     <Compile Include="Products\Models\MappingTests.cs" />
     <Compile Include="Products\Models\ProductWriteDtoTests.cs" />

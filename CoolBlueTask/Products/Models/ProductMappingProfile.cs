@@ -8,7 +8,8 @@ namespace CoolBlueTask.Products.Models
 		{
 			CreateMap<Product, ProductReadDto>();
 
-			CreateMap<ProductWriteDto, Product>();
+			CreateMap<ProductWriteDto, Product>()
+				.ForMember(m => m.Id, fm => fm.Ignore());
 		}
 	}
 }

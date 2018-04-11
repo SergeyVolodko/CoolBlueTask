@@ -187,6 +187,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="DataBaseException.cs" />
+    <Compile Include="DomainCoreModule.cs" />
     <Compile Include="Products\Models\ProductMappingProfile.cs" />
     <Compile Include="Products\Models\ProductReadDto.cs" />
     <Compile Include="Products\ProductValidator.cs" />

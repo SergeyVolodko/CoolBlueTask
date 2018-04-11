@@ -189,6 +189,7 @@
     <Compile Include="DataBaseException.cs" />
     <Compile Include="Products\Models\ProductMappingProfile.cs" />
     <Compile Include="Products\Models\ProductReadDto.cs" />
+    <Compile Include="Products\ProductValidator.cs" />
     <Compile Include="SalesCombinations\SaleasCombinationRepository.cs" />
     <Compile Include="SalesCombinations\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationService.cs" />

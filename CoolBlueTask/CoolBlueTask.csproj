@@ -170,6 +170,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiLoggerFactory.cs" />
     <Compile Include="App_Start\ApiExceptionFilterAttribute.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

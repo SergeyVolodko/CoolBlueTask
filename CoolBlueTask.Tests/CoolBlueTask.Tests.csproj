@@ -169,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiExceptionFilterTests.cs" />
+    <Compile Include="ApiLoggerFactoryTests.cs" />
     <Compile Include="DataStructuresTests.cs" />
     <Compile Include="Infrastructure\AutoNSubstituteDataAttribute.cs" />
     <Compile Include="AdHocTests.cs" />

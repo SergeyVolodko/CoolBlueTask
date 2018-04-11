@@ -7,6 +7,7 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using FluentAssertions;
+using NLog;
 using NSubstitute;
 using Xunit;
 using Owin;
@@ -50,13 +51,21 @@ namespace CoolBlueTask.Tests
 		}
 
 		[Fact]
+		public void logger_is_registered()
+		{
+			// Act
+			var actual = container.Resolve<ILogger>();
+
+			// Assert
+			actual.Should().NotBeNull();
+		}
+
+		[Fact]
 		public void api_exception_filter_registered()
 		{
 			// Arrange
-
 			using (var scope = startup.container.BeginLifetimeScope("AutofacWebRequest"))
 			{
-
 				// Act
 				var actual = scope.Resolve<IAutofacExceptionFilter>();
 

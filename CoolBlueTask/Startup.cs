@@ -25,8 +25,8 @@ namespace CoolBlueTask
 
 			var builder = new ContainerBuilder();
 
-			builder.RegisterInstance(LogManager.GetCurrentClassLogger())
-				.As<ILogger>();
+			var logger = ApiLoggerFactory.CreateFileLogger();
+			builder.RegisterInstance(logger).As<ILogger>();
 
 			builder.RegisterModule(new ProductModule());
 			builder.RegisterType<VersionController>();

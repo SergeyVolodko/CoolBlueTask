@@ -83,8 +83,8 @@
       <HintPath>..\packages\FluentAssertions.4.2.2\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentValidation.7.5.2\lib\net45\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -205,7 +205,7 @@
     <Compile Include="Products\Controller\GetAllProducts.cs" />
     <Compile Include="ProductsControllerTests\GetProductSalesCombinations.cs" />
     <Compile Include="Products\Controller\SearchProducts.cs" />
-    <Compile Include="ProductServiceTests\AddProduct.cs" />
+    <Compile Include="Products\Service\CreateProductTests.cs" />
     <Compile Include="Products\Service\GetAllTests.cs" />
     <Compile Include="ProductServiceTests\SearchProducts.cs" />
     <Compile Include="Products\Models\MappingTests.cs" />

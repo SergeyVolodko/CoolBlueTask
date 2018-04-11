@@ -1,6 +1,8 @@
 
 using Autofac;
+using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations;
+using FluentValidation;
 
 namespace CoolBlueTask.Products
 {
@@ -17,6 +19,9 @@ namespace CoolBlueTask.Products
 				.As<ISaleasCombinationRepository>()
 				.WithParameter("connectionString", @"C:\temp\db.sqlite")
 				.SingleInstance();
+
+			builder.RegisterType<ProductValidator>()
+				.As<AbstractValidator<Product>>();
 
 			builder.RegisterType<ProductService>()
 				.As<IProductService>();

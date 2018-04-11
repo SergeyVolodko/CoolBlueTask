@@ -15,9 +15,9 @@ namespace CoolBlueTask.Products
 		}
 
 		public override ValidationResult Validate(
-			ValidationContext<Product> context)
+			Product instance)
 		{
-			if (context.InstanceToValidate == null)
+			if (instance == null)
 			{
 				return new ValidationResult(new List<ValidationFailure>
 				{
@@ -25,7 +25,7 @@ namespace CoolBlueTask.Products
 				});
 			}
 
-			return base.Validate(context);
+			return base.Validate(instance);
 		}
 	}
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CoolBlueTask.Products.Models;
+using FluentValidation;
 
 namespace CoolBlueTask.Products
 {
@@ -15,27 +16,36 @@ namespace CoolBlueTask.Products
 	public class ProductService : IProductService
 	{
 		private readonly IMapper mapper;
+		private readonly AbstractValidator<Product> validator;
 		private readonly IProductRepository productRepository;
 
 		public ProductService(
 			IMapper mapper,
+			AbstractValidator<Product> validator,
 			IProductRepository productRepository)
 		{
 			this.mapper = mapper;
+			this.validator = validator;
 			this.productRepository = productRepository;
 		}
 
-		public ProductReadDto CreateProduct(ProductWriteDto product)
+		public ProductReadDto CreateProduct(
+			ProductWriteDto productToCreate)
 		{
-			//if (string.IsNullOrWhiteSpace(product.Name))
-			//{
-			//    return ProductResult.NameIsEmpty;
-			//}
+			var product = mapper.Map<ProductWriteDto, Product>(productToCreate);
 
-			//var createdProduct = 
-			//productRepository.Save((Product)product);
+			var validationResult = validator.Validate(product);
 
-			return null;
+			if (!validationResult.IsValid)
+			{
+				throw new ValidationException(validationResult.Errors);
+			}
+
+			var createdProduct = productRepository.Save(product);
+
+			var createdDto = mapper.Map<Product, ProductReadDto>(createdProduct);
+
+			return createdDto;
 		}
 
 		public IList<ProductReadDto> GetAll()

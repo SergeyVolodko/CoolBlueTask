@@ -7,7 +7,7 @@ namespace CoolBlueTask.Products
 {
 	public interface IProductRepository
 	{
-		void Save(Product product);
+		Product Save(Product product);
 		IList<Product> LoadAll();
 		IList<Product> LoadByNameOrDescription(string searchText);
 	}
@@ -30,12 +30,14 @@ namespace CoolBlueTask.Products
 			return Database.OpenFile(connectionString);
 		}
 
-		public void Save(Product product)
+		public Product Save(Product product)
 		{
 			try
 			{
 				product.Id = Guid.NewGuid().ToString();
 				OpenDB().Product.Insert(product);
+
+				return product;
 			}
 			catch (Exception)
 			{

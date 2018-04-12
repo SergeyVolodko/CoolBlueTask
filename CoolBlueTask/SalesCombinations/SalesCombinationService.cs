@@ -1,11 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
+using CoolBlueTask.SalesCombinations.Models;
 
 namespace CoolBlueTask.SalesCombinations
 {
     public interface ISalesCombinationService
     {
-        IList<SalesCombination> GetByProduct(string productId);
+        IList<SalesCombinationReadDto> GetProductSalesCombinations(string productId);
     }
 
 
@@ -19,17 +20,18 @@ namespace CoolBlueTask.SalesCombinations
             this.salesRepository = salesRepository;
         }
 
-        public IList<SalesCombination> GetByProduct(
+        public IList<SalesCombinationReadDto> GetProductSalesCombinations(
             string productId)
         {
-            Guid id;
-            if (!Guid.TryParse(productId, out id))
-            {
-                return null;
-            }
+	        return null;
+	        //Guid id;
+	        //if (!Guid.TryParse(productId, out id))
+	        //{
+	        //    return null;
+	        //}
 
-            return salesRepository
-                .LoadByProduct(id);
+	        //return salesRepository
+	        //    .LoadByProduct(id);
         }
     }
 }

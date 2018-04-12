@@ -1,7 +1,6 @@
 using Autofac;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
-using CoolBlueTask.SalesCombinations;
 using FluentAssertions;
 using FluentValidation;
 using Xunit;
@@ -21,30 +20,24 @@ namespace CoolBlueTask.Tests.Products
 		}
 
 		[Fact]
-		public void repositories_are_registered()
+		public void repository_is_registered()
 		{
 			// Act
 			var productRepo = container.Resolve<IProductRepository>();
-			var salesRepo = container.Resolve<ISaleasCombinationRepository>();
 
 			// Assert
 			productRepo.Should().BeOfType<ProductRepository>();
-			salesRepo.Should().BeOfType<SaleasCombinationRepository>();
 		}
 
 		[Fact]
-		public void repositories_are_singletones()
+		public void repository_is_singletones()
 		{
 			// Act
 			var productRepo1 = container.Resolve<IProductRepository>();
 			var productRepo2 = container.Resolve<IProductRepository>();
 
-			var salesRepo1 = container.Resolve<ISaleasCombinationRepository>();
-			var salesRepo2 = container.Resolve<ISaleasCombinationRepository>();
-
 			// Assert
 			productRepo1.Should().Be(productRepo2);
-			salesRepo1.Should().Be(salesRepo2);
 		}
 
 		[Fact]
@@ -58,15 +51,13 @@ namespace CoolBlueTask.Tests.Products
 		}
 
 		[Fact]
-		public void services_are_registered()
+		public void service_is_registered()
 		{
 			// Act
 			var productService = container.Resolve<IProductService>();
-			var salesService = container.Resolve<ISalesCombinationService>();
 
 			// Assert
 			productService.Should().BeOfType<ProductService>();
-			salesService.Should().BeOfType<SalesCombinationService>();
 		}
 
 		[Fact]

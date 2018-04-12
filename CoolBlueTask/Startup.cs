@@ -1,10 +1,9 @@
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using AutoMapper;
 using CoolBlueTask.Products;
+using CoolBlueTask.SalesCombinations;
 using Microsoft.Owin;
-using NLog;
 using Owin;
 
 [assembly: OwinStartup(typeof(CoolBlueTask.Startup))]
@@ -28,6 +27,7 @@ namespace CoolBlueTask
 
 			builder.RegisterModule(new DomainCoreModule());
 			builder.RegisterModule(new ProductModule());
+			builder.RegisterModule(new SalesCombinationsModule());
 			builder.RegisterType<VersionController>();
 
 			builder.RegisterType<ApiExceptionFilterAttribute>()

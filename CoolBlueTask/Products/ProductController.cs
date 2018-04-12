@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Net;
 using System.Web.Http;
 using CoolBlueTask.Products.Models;
-using CoolBlueTask.SalesCombinations;
 
 namespace CoolBlueTask.Products
 {
@@ -10,14 +8,11 @@ namespace CoolBlueTask.Products
 	public class ProductController : ApiController
 	{
 		private readonly IProductService productService;
-		private readonly ISalesCombinationService salesService;
 
 		public ProductController(
-			IProductService productService,
-			ISalesCombinationService salesService)
+			IProductService productService)
 		{
 			this.productService = productService;
-			this.salesService = salesService;
 		}
 
 		[HttpPost]
@@ -40,22 +35,6 @@ namespace CoolBlueTask.Products
 		public IList<ProductReadDto> SearchProducts(string searchText)
 		{
 			return productService.SearchByText(searchText);
-		}
-
-		[HttpGet]
-		[Route("{productId}/salesCombinations")]
-		public IList<SalesCombination> GetProductSalesCombinations(string productId)
-		{
-			var sales = salesService
-				.GetByProduct(productId);
-
-			if (sales == null)
-			{
-				throw new HttpResponseException(
-					HttpStatusCode.BadRequest);
-			}
-
-			return sales;
 		}
 	}
 }

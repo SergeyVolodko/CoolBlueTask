@@ -1,0 +1,23 @@
+{
+  "id": "some-combination-id",
+  "main_product": {
+    "id": "laptop-id",
+    "name": "Laptop",
+    "description": "Turbo-ultra-book",
+    "price": 1000.0
+  },
+  "related_products": [
+    {
+      "id": "mouse-id",
+      "name": "Mouse",
+      "description": "Swift wireless mouse",
+      "price": 15.5
+    },
+    {
+      "id": "headset-id",
+      "name": "Headset",
+      "description": "Turbo Hi-Fi headset",
+      "price": 50.0
+    }
+  ]
+}

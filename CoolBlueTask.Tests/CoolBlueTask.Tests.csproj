@@ -203,17 +203,18 @@
     <Compile Include="Products\ProductRepositoryIntegrationTests.cs" />
     <Compile Include="Products\Controller\CreateProduct.cs" />
     <Compile Include="Products\Controller\GetAllProducts.cs" />
-    <Compile Include="ProductsControllerTests\GetProductSalesCombinations.cs" />
+    <Compile Include="SalesCombinations\Controller\GetProductSalesCombinations.cs" />
     <Compile Include="Products\Controller\SearchProducts.cs" />
     <Compile Include="Products\Service\CreateProductTests.cs" />
     <Compile Include="Products\Service\SearchByTextTests.cs" />
     <Compile Include="Products\Service\GetAllTests.cs" />
-    <Compile Include="ProductServiceTests\SearchProducts.cs" />
     <Compile Include="Products\Models\MappingTests.cs" />
     <Compile Include="Products\Models\ProductWriteDtoTests.cs" />
     <Compile Include="Products\Models\ProductReadDtoTests.cs" />
     <Compile Include="Products\ProductValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesCombinations\Models\SalesCombinationReadDtoTests.cs" />
+    <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />
     <Compile Include="SalesRepositoryIntegrationTests.cs" />
     <Compile Include="SalesServiceTests\GetByProduct.cs" />
     <Compile Include="StartupIntegrationTests.cs" />
@@ -229,6 +230,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="test_files\sales_combination_read_dto.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="test_files\product_write_dto.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -236,9 +240,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SalesCombinations\Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,0 +1,7 @@
+{
+  "main_product_id": "laptop-id",
+  "related_products": [
+    "mouse-id",
+    "headset-id"
+  ]
+}

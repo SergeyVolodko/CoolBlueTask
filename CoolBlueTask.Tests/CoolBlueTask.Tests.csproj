@@ -203,6 +203,7 @@
     <Compile Include="Products\ProductRepositoryIntegrationTests.cs" />
     <Compile Include="Products\Controller\CreateProduct.cs" />
     <Compile Include="Products\Controller\GetAllProducts.cs" />
+    <Compile Include="SalesCombinations\Controller\CreateSalesCombination.cs" />
     <Compile Include="SalesCombinations\Controller\GetProductSalesCombinations.cs" />
     <Compile Include="Products\Controller\SearchProducts.cs" />
     <Compile Include="Products\Service\CreateProductTests.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Products\Models\ProductReadDtoTests.cs" />
     <Compile Include="Products\ProductValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesCombinations\Models\SalesCombinationWriteDtoTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDtoTests.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />
     <Compile Include="SalesRepositoryIntegrationTests.cs" />
@@ -230,6 +232,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="test_files\sales_combination_write_dto.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="test_files\sales_combination_read_dto.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

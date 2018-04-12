@@ -7,6 +7,8 @@ namespace CoolBlueTask.SalesCombinations
     public interface ISalesCombinationService
     {
         IList<SalesCombinationReadDto> GetProductSalesCombinations(string productId);
+	    SalesCombinationReadDto CreateSalesCombination(
+			SalesCombinationWriteDto combination);
     }
 
 
@@ -33,5 +35,10 @@ namespace CoolBlueTask.SalesCombinations
 	        //return salesRepository
 	        //    .LoadByProduct(id);
         }
+
+	    public SalesCombinationReadDto CreateSalesCombination(SalesCombinationWriteDto combination)
+	    {
+		    throw new NotImplementedException();
+	    }
     }
 }

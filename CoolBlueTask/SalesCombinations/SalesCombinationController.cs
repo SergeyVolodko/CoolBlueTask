@@ -14,6 +14,14 @@ namespace CoolBlueTask.SalesCombinations
 			this.service = service;
 		}
 
+		[HttpPost]
+		[Route("sales_combinations")]
+		public SalesCombinationReadDto CreateCombination(
+			[FromBody]SalesCombinationWriteDto combination)
+		{
+			return service.CreateSalesCombination(combination);
+		}
+
 		[HttpGet]
 		[Route("products/{productId}/sales_combinations")]
 		public IList<SalesCombinationReadDto> GetProductSalesCombinations(

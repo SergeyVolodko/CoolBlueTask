@@ -198,6 +198,7 @@
     <Compile Include="Products\Models\ProductReadDto.cs" />
     <Compile Include="Products\ProductValidator.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDto.cs" />
+    <Compile Include="SalesCombinations\Models\SalesCombinationWriteDto.cs" />
     <Compile Include="SalesCombinations\SaleasCombinationRepository.cs" />
     <Compile Include="SalesCombinations\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationController.cs" />

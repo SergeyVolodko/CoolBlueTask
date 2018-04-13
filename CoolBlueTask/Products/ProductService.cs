@@ -82,7 +82,18 @@ namespace CoolBlueTask.Products
 			string id, 
 			ProductWriteDto productToUpdate)
 		{
-			throw new System.NotImplementedException();
+			var product = mapper.Map<ProductWriteDto, Product>(productToUpdate);
+
+			var validationResult = validator.Validate(product);
+			if (!validationResult.IsValid)
+			{
+				throw new ValidationException(validationResult.Errors);
+			}
+
+			var updatedProduct = productRepository.Update(id, product);
+
+			var createdDto = mapper.Map<Product, ProductReadDto>(updatedProduct);
+			return createdDto;
 		}
 	}
 }

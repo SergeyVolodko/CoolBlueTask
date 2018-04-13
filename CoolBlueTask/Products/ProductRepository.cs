@@ -8,6 +8,7 @@ namespace CoolBlueTask.Products
 	public interface IProductRepository
 	{
 		Product Save(Product product);
+		Product Update(string id, Product product);
 		IList<Product> LoadAll();
 		IList<Product> LoadByNameOrDescription(string searchText);
 		bool Exists(string productId);
@@ -45,6 +46,11 @@ namespace CoolBlueTask.Products
 			{
 				throw new DataBaseException();
 			}
+		}
+
+		public Product Update(string id, Product product)
+		{
+			throw new NotImplementedException();
 		}
 
 		public IList<Product> LoadAll()

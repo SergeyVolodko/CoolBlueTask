@@ -11,6 +11,7 @@ namespace CoolBlueTask.Products
 		IList<Product> LoadAll();
 		IList<Product> LoadByNameOrDescription(string searchText);
 		bool Exists(string productId);
+		Product LoadById(string id);
 	}
 
 	public class ProductRepository : IProductRepository
@@ -77,6 +78,11 @@ namespace CoolBlueTask.Products
 		}
 
 		public bool Exists(string productId)
+		{
+			throw new NotImplementedException();
+		}
+
+		public Product LoadById(string id)
 		{
 			throw new NotImplementedException();
 		}

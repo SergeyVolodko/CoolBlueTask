@@ -68,10 +68,19 @@ namespace CoolBlueTask.Products
 
 		public ProductReadDto GetProductById(string id)
 		{
-			throw new System.NotImplementedException();
+			if (!productRepository.Exists(id))
+			{
+				throw new EntityNotFoundException();
+			}
+
+			var product = productRepository.LoadById(id);
+
+			return mapper.Map<Product, ProductReadDto>(product);
 		}
 
-		public ProductReadDto UpdateProduct(string id, ProductWriteDto productToUpdate)
+		public ProductReadDto UpdateProduct(
+			string id, 
+			ProductWriteDto productToUpdate)
 		{
 			throw new System.NotImplementedException();
 		}

@@ -57,7 +57,7 @@ namespace CoolBlueTask
 			var warningExceptions =
 				new[]
 				{
-					//nameof(EntityNotFoundWarningException),
+					nameof(EntityNotFoundException),
 					nameof(ValidationException)
 				};
 

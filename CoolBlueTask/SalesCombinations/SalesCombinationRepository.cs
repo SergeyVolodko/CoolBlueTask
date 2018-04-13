@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CoolBlueTask.SalesCombinations.Models;
 using Simple.Data;
 
 namespace CoolBlueTask.SalesCombinations

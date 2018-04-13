@@ -88,7 +88,8 @@ namespace CoolBlueTask.Tests
 		public static IEnumerable<object[]> ErrorTypes()
 		{
 			yield return new object[] { new ValidationException("error"), LogLevel.Warn };
-			//yield return new object[] { new NullReferenceException(), LogLevel.Error };
+			yield return new object[] { new EntityNotFoundException(), LogLevel.Warn };
+			yield return new object[] { new NullReferenceException(), LogLevel.Error };
 			yield return new object[] { new DataBaseException(), LogLevel.Error };
 			yield return new object[] { new OutOfMemoryException("fatal"), LogLevel.Fatal };
 			yield return new object[] { new StackOverflowException("fatal"), LogLevel.Fatal };

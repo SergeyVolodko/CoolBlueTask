@@ -214,6 +214,7 @@
     <Compile Include="Products\Models\ProductReadDtoTests.cs" />
     <Compile Include="Products\ProductValidatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesCombinations\Models\MappingTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationWriteDtoTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDtoTests.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />

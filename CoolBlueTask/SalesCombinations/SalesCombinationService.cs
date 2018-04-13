@@ -41,7 +41,8 @@ namespace CoolBlueTask.SalesCombinations
 			var combinations = combinationRepository
 				.LoadByProduct(productId);
 
-			return mapper.Map<IList<SalesCombination>, IList<SalesCombinationReadDto>>(combinations);
+			return mapper.Map<IList<SalesCombination>, IList<SalesCombinationReadDto>>(
+				combinations);
 		}
 
 		public SalesCombinationReadDto CreateSalesCombination(SalesCombinationWriteDto combination)

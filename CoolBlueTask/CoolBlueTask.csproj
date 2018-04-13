@@ -198,10 +198,11 @@
     <Compile Include="Products\Models\ProductMappingProfile.cs" />
     <Compile Include="Products\Models\ProductReadDto.cs" />
     <Compile Include="Products\ProductValidator.cs" />
+    <Compile Include="SalesCombinations\Models\SalesCombinationMappingProfile.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDto.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationWriteDto.cs" />
     <Compile Include="SalesCombinations\SalesCombinationRepository.cs" />
-    <Compile Include="SalesCombinations\SalesCombination.cs" />
+    <Compile Include="SalesCombinations\Models\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationController.cs" />
     <Compile Include="SalesCombinations\SalesCombinationService.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModule.cs" />

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Products;
@@ -11,14 +10,14 @@ using Xunit;
 
 namespace CoolBlueTask.Tests.Products.Controller
 {
-	public class SearchProducts
+	public class UpdateProductTests
 	{
 		[Fact]
-		public void routing_search_products()
+		public void routing_get_product_by_id()
 		{
 			// Arrange
-			var uri = @"http://localhost:12259/products/search-text-input";
-			var request = new HttpRequestMessage(HttpMethod.Get, uri);
+			var uri = @"http://localhost:4242/products/42";
+			var request = new HttpRequestMessage(HttpMethod.Put, uri);
 			var config = new HttpConfiguration();
 
 			// Act
@@ -27,41 +26,42 @@ namespace CoolBlueTask.Tests.Products.Controller
 
 			// Asserts
 			route.Controller.Should().Be<ProductController>();
-			route.Action.Should().Be("SearchProducts");
+			route.Action.Should().Be("UpdateProduct");
 		}
 
 		[Theory]
 		[ControllerAutoData]
-		public void calls_service_search_products(
+		public void calls_service_update_product(
 			[Frozen] IProductService service,
 			ProductController sut,
-			string searchText)
+			string id,
+			ProductWriteDto productToUpdate)
 		{
 			// Act
-			sut.SearchProducts(searchText);
+			sut.UpdateProduct(id, productToUpdate);
 
 			// Assert
-			service.Received().SearchByText(searchText);
+			service.Received().UpdateProduct(id, productToUpdate);
 		}
 
 		[Theory]
 		[ControllerAutoData]
-		public void returns_all_found_products(
+		public void returns_updated_product_from_service(
 			[Frozen] IProductService service,
 			ProductController sut,
-			IList<ProductReadDto> products,
-			string searchText)
+			string id,
+			ProductWriteDto productToUpdate,
+			ProductReadDto product)
 		{
-			// setup
-			service
-				.SearchByText(searchText)
-				.Returns(products);
+			// Arrange
+			service.UpdateProduct(id, productToUpdate)
+				.Returns(product);
 
 			// Act
-			var actual = sut.SearchProducts(searchText);
+			var actual = sut.UpdateProduct(id, productToUpdate);
 
-			// Asserts
-			actual.ShouldAllBeEquivalentTo(products);
+			// Assert
+			actual.ShouldBeEquivalentTo(product);
 		}
 	}
 }

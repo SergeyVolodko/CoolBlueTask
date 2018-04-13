@@ -7,12 +7,12 @@ namespace CoolBlueTask.Products
 	[RoutePrefix("products")]
 	public class ProductController : ApiController
 	{
-		private readonly IProductService productService;
+		private readonly IProductService service;
 
 		public ProductController(
-			IProductService productService)
+			IProductService service)
 		{
-			this.productService = productService;
+			this.service = service;
 		}
 
 		[HttpPost]
@@ -20,21 +20,37 @@ namespace CoolBlueTask.Products
 		public ProductReadDto CreateProduct(
 			[FromBody]ProductWriteDto product)
 		{
-			return productService.CreateProduct(product);
+			return service.CreateProduct(product);
+		}
+
+		[HttpPut]
+		[Route("{id}")]
+		public ProductReadDto UpdateProduct(
+			string id,
+			[FromBody]ProductWriteDto productToUpdate)
+		{
+			return service.UpdateProduct(id, productToUpdate);
 		}
 
 		[HttpGet]
 		[Route("")]
 		public IList<ProductReadDto> GetAllProducts()
 		{
-			return productService.GetAll();
+			return service.GetAll();
 		}
 
 		[HttpGet]
-		[Route("{searchText}")]
+		[Route("{id}")]
+		public ProductReadDto GetProduct(string id)
+		{
+			return service.GetProductById(id);
+		}
+
+		[HttpGet]
+		[Route("search/{searchText}")]
 		public IList<ProductReadDto> SearchProducts(string searchText)
 		{
-			return productService.SearchByText(searchText);
+			return service.SearchByText(searchText);
 		}
 	}
 }

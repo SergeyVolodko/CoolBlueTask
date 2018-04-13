@@ -8,8 +8,11 @@ namespace CoolBlueTask.Products
 	public interface IProductService
 	{
 		ProductReadDto CreateProduct(ProductWriteDto product);
+		ProductReadDto UpdateProduct(string id, ProductWriteDto productToUpdate);
+
 		IList<ProductReadDto> GetAll();
 		IList<ProductReadDto> SearchByText(string searchText);
+		ProductReadDto GetProductById(string id);
 	}
 
 	public class ProductService : IProductService
@@ -61,6 +64,16 @@ namespace CoolBlueTask.Products
 			var dtos = mapper.Map<IList<Product>, IList<ProductReadDto>>(products);
 
 			return dtos;
+		}
+
+		public ProductReadDto GetProductById(string id)
+		{
+			throw new System.NotImplementedException();
+		}
+
+		public ProductReadDto UpdateProduct(string id, ProductWriteDto productToUpdate)
+		{
+			throw new System.NotImplementedException();
 		}
 	}
 }

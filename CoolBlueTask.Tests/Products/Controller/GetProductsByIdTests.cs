@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Products;
@@ -12,13 +10,13 @@ using Xunit;
 
 namespace CoolBlueTask.Tests.Products.Controller
 {
-	public class GetAllProducts
+	public class GetProductsByIdTests
 	{
 		[Fact]
-		public void routing_get_all_products()
+		public void routing_get_product_by_id()
 		{
 			// Arrange
-			var uri = @"http://localhost:4242/products";
+			var uri = @"http://localhost:4242/products/42";
 			var request = new HttpRequestMessage(HttpMethod.Get, uri);
 			var config = new HttpConfiguration();
 
@@ -28,39 +26,40 @@ namespace CoolBlueTask.Tests.Products.Controller
 
 			// Asserts
 			route.Controller.Should().Be<ProductController>();
-			route.Action.Should().Be("GetAllProducts");
+			route.Action.Should().Be("GetProduct");
 		}
 
 		[Theory]
 		[ControllerAutoData]
-		public void calls_service_get_all_products(
-			[Frozen] IProductService service,
-			ProductController sut)
-		{
-			// Act
-			sut.GetAllProducts();
-
-			// Assert
-			service.Received().GetAll();
-		}
-
-		[Theory]
-		[ControllerAutoData]
-		public void returns_products_from_service(
+		public void calls_service_get_product_by_id(
 			[Frozen] IProductService service,
 			ProductController sut,
-			IList<ProductReadDto> products)
+			string id)
 		{
-			// Arrange
-			service
-				.GetAll()
-				.Returns(products);
-
 			// Act
-			var actual = sut.GetAllProducts().ToList();
+			sut.GetProduct(id);
 
 			// Assert
-			actual.ShouldAllBeEquivalentTo(products);
+			service.Received().GetProductById(id);
+		}
+
+		[Theory]
+		[ControllerAutoData]
+		public void returns_product_from_service(
+			[Frozen] IProductService service,
+			ProductController sut,
+			ProductReadDto product,
+			string id)
+		{
+			// Arrange
+			service.GetProductById(id)
+				.Returns(product);
+
+			// Act
+			var actual = sut.GetProduct(id);
+
+			// Assert
+			actual.ShouldBeEquivalentTo(product);
 		}
 	}
 }

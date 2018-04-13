@@ -27,7 +27,7 @@ namespace CoolBlueTask.SalesCombinations
 		public IList<SalesCombinationReadDto> GetProductSalesCombinations(
 			string productId)
 		{
-			return service.GetProductSalesCombinations(productId);
+			return service.GetCombinationsForProduct(productId);
 		}
 	}
 }

@@ -24,18 +24,18 @@ namespace CoolBlueTask.Tests.Products
 		public void repository_is_registered()
 		{
 			// Act
-			var repo = container.Resolve<ISaleasCombinationRepository>();
+			var repo = container.Resolve<ISalesCombinationRepository>();
 
 			// Assert
-			repo.Should().BeOfType<SaleasCombinationRepository>();
+			repo.Should().BeOfType<SalesCombinationRepository>();
 		}
 
 		[Fact]
 		public void repository_is_a_singletones()
 		{
 			// Act
-			var repo1 = container.Resolve<ISaleasCombinationRepository>();
-			var repo2 = container.Resolve<ISaleasCombinationRepository>();
+			var repo1 = container.Resolve<ISalesCombinationRepository>();
+			var repo2 = container.Resolve<ISalesCombinationRepository>();
 
 			// Assert
 			repo1.Should().Be(repo2);

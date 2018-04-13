@@ -42,7 +42,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Controller
 
 			// Assert
 			service.Received()
-				.GetProductSalesCombinations(productId);
+				.GetCombinationsForProduct(productId);
 		}
 
 		[Theory]
@@ -55,7 +55,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Controller
 		{
 			// Arrange
 			service
-				.GetProductSalesCombinations(productId)
+				.GetCombinationsForProduct(productId)
 				.Returns(sales);
 
 			// Act

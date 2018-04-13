@@ -7,8 +7,8 @@ namespace CoolBlueTask.SalesCombinations
 		protected override void Load(ContainerBuilder builder)
 		{
 
-			builder.RegisterType<SaleasCombinationRepository>()
-				.As<ISaleasCombinationRepository>()
+			builder.RegisterType<SalesCombinationRepository>()
+				.As<ISalesCombinationRepository>()
 				.WithParameter("connectionString", @"C:\temp\db.sqlite")
 				.SingleInstance();
 

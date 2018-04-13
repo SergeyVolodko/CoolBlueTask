@@ -3,6 +3,7 @@ using ApprovalTests;
 using ApprovalTests.Reporters;
 using ApprovalTests.Writers;
 using CoolBlueTask.Products.Models;
+using CoolBlueTask.Tests.Infrastructure;
 using Newtonsoft.Json;
 using Xunit;
 

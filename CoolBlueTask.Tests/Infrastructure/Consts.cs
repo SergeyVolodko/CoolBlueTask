@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace CoolBlueTask.Tests
+namespace CoolBlueTask.Tests.Infrastructure
 {
 	public static class Consts
 	{

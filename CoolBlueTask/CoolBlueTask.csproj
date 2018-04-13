@@ -188,11 +188,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiLoggerFactory.cs" />
+    <Compile Include="Api.Core\ApiLoggerFactory.cs" />
     <Compile Include="Api.Core\ApiExceptionFilterAttribute.cs" />
     <Compile Include="Api.Core\SwaggerConfig.cs" />
     <Compile Include="Api.Core\WebApiConfig.cs" />
-    <Compile Include="DataBaseException.cs" />
+    <Compile Include="Api.Core\DataBaseException.cs" />
     <Compile Include="DomainCoreModule.cs" />
     <Compile Include="EntityNotFoundException.cs" />
     <Compile Include="Products\Models\ProductMappingProfile.cs" />

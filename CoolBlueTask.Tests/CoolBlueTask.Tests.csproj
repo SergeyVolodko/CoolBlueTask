@@ -192,9 +192,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApiExceptionFilterTests.cs" />
-    <Compile Include="ApiLoggerFactoryTests.cs" />
-    <Compile Include="Consts.cs" />
+    <Compile Include="Api.Core\ApiExceptionFilterTests.cs" />
+    <Compile Include="Api.Core\ApiLoggerFactoryTests.cs" />
+    <Compile Include="Infrastructure\Consts.cs" />
     <Compile Include="Infrastructure\AutoNSubstituteDataAttribute.cs" />
     <Compile Include="AdHocTests.cs" />
     <Compile Include="Infrastructure\ControllerAutoDataAttribute.cs" />
@@ -218,6 +218,7 @@
     <Compile Include="SalesCombinations\Models\SalesCombinationWriteDtoTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDtoTests.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />
+    <Compile Include="SalesCombinations\Service\CreateSalesCombinationTests.cs" />
     <Compile Include="SalesCombinations\Service\GetCombinationsForProductTests.cs" />
     <Compile Include="SalesRepositoryIntegrationTests.cs" />
     <Compile Include="StartupIntegrationTests.cs" />

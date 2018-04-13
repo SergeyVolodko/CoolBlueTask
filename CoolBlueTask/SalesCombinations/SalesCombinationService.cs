@@ -13,7 +13,6 @@ namespace CoolBlueTask.SalesCombinations
 			SalesCombinationWriteDto combination);
 	}
 
-
 	public class SalesCombinationService : ISalesCombinationService
 	{
 		private readonly ISalesCombinationRepository combinationRepository;
@@ -45,7 +44,8 @@ namespace CoolBlueTask.SalesCombinations
 				combinations);
 		}
 
-		public SalesCombinationReadDto CreateSalesCombination(SalesCombinationWriteDto combination)
+		public SalesCombinationReadDto CreateSalesCombination(
+			SalesCombinationWriteDto combination)
 		{
 			throw new NotImplementedException();
 		}

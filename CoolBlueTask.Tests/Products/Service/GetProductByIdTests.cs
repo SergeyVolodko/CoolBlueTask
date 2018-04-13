@@ -1,12 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
-using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using NSubstitute;

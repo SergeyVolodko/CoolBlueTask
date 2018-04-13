@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -7,7 +8,9 @@ using Autofac.Integration.WebApi;
 using NLog;
 using System.Linq;
 using System.Text;
+using CoolBlueTask.Api.Core;
 using FluentValidation;
+using Newtonsoft.Json;
 
 namespace CoolBlueTask
 {
@@ -36,6 +39,15 @@ namespace CoolBlueTask
 			{
 				httpStatusCode = HttpStatusCode.Unauthorized;
 			}
+			else
+			if (exception is ValidationException)
+			{
+				throwValidationError((ValidationException)exception);
+			}
+			else if (exception is EntityNotFoundException)
+			{
+				throwExceptionWithDebugInfo(exception, HttpStatusCode.NotFound);
+			}
 
 			throwExceptionWithDebugInfo(exception, httpStatusCode);
 		}
@@ -46,7 +58,6 @@ namespace CoolBlueTask
 			string endpoint)
 		{
 			var exceptionName = exception.GetType().Name;
-
 			var fatalExceptions =
 				new[]
 				{
@@ -87,6 +98,27 @@ namespace CoolBlueTask
 			var ex = new HttpResponseMessage(statusCode)
 				{ Content = new StringContent(exception.Message + exception.StackTrace) };
 			throw new HttpResponseException(ex);
+		}
+
+		private void throwValidationError(ValidationException ex)
+		{
+			var errorList = new List<InvalidField>();
+			if (ex.Errors.Any())
+			{
+				errorList = ex.Errors
+					.Select(e => new InvalidField(e)).ToList();
+			}
+			else
+			{
+				errorList.Add(new InvalidField { ErrorMessage = ex.Message });
+			}
+
+			var responseMessage = new HttpResponseMessage(HttpStatusCode.BadRequest)
+			{
+				Content = new StringContent(JsonConvert.SerializeObject(
+					errorList, Formatting.Indented))
+			};
+			throw new HttpResponseException(responseMessage);
 		}
 	}
 

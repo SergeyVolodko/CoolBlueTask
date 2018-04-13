@@ -1,12 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using FluentValidation;
+using FluentValidation.Results;
+using Newtonsoft.Json;
 using NSubstitute;
 using NLog;
+using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
 namespace CoolBlueTask.Tests
@@ -77,12 +82,11 @@ namespace CoolBlueTask.Tests
 
 		public static IEnumerable<object[]> ErrorTypesAndCodes()
 		{
-			//yield return new object[] { new ValidationException("error"), HttpStatusCode.BadRequest };
-			//yield return new object[] { new ValidationErrorException("error"), HttpStatusCode.BadRequest };
+			yield return new object[] { new ValidationException("error"), HttpStatusCode.BadRequest };
 			yield return new object[] { new UnauthorizedAccessException(), HttpStatusCode.Unauthorized };
 			yield return new object[] { new NullReferenceException(), HttpStatusCode.InternalServerError };
 			yield return new object[] { new Exception(), HttpStatusCode.InternalServerError };
-			//yield return new object[] { new EntityNotFoundException(new Entity()), HttpStatusCode.NotFound };
+			yield return new object[] { new EntityNotFoundException(), HttpStatusCode.NotFound };
 		}
 
 		public static IEnumerable<object[]> ErrorTypes()
@@ -93,6 +97,34 @@ namespace CoolBlueTask.Tests
 			yield return new object[] { new DataBaseException(), LogLevel.Error };
 			yield return new object[] { new OutOfMemoryException("fatal"), LogLevel.Fatal };
 			yield return new object[] { new StackOverflowException("fatal"), LogLevel.Fatal };
+		}
+
+		[Theory]
+		[AutoData]
+		public void validation_error_should_contain_all_validation_messages(
+			List<ValidationFailure> failures)
+		{
+			// Arrange
+			var exception = new ValidationException(failures);
+			var context = WebApi.MockContextWithException(exception);
+			var errorList = exception.Errors.Select(error =>
+				new InvalidField
+				{
+					PropertyName = error.PropertyName,
+					ErrorCode = error.ErrorCode,
+					ErrorMessage = error.ErrorMessage
+				}).ToList();
+
+			var expectedJson = JsonConvert.SerializeObject(errorList, Formatting.Indented);
+
+			// Act // Assert
+			sut.Invoking(s => s.OnException(context))
+				.ShouldThrow<HttpResponseException>()
+				.And
+				.Response.Content
+				.ReadAsStringAsync().GetAwaiter().GetResult()
+				.Should()
+				.Be(expectedJson);
 		}
 	}
 }

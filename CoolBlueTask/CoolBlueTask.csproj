@@ -190,6 +190,7 @@
   <ItemGroup>
     <Compile Include="Api.Core\ApiLoggerFactory.cs" />
     <Compile Include="Api.Core\ApiExceptionFilterAttribute.cs" />
+    <Compile Include="Api.Core\InvalidField.cs" />
     <Compile Include="Api.Core\SwaggerConfig.cs" />
     <Compile Include="Api.Core\WebApiConfig.cs" />
     <Compile Include="Api.Core\DataBaseException.cs" />

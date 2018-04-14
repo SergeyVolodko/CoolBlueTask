@@ -9,6 +9,7 @@ namespace CoolBlueTask.Products
 	{
 		Product Save(Product product);
 		Product Update(string id, Product product);
+
 		IList<Product> LoadAll();
 		IList<Product> LoadByNameOrDescription(string searchText);
 		bool Exists(string productId);
@@ -50,7 +51,17 @@ namespace CoolBlueTask.Products
 
 		public Product Update(string id, Product product)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				product.Id = id;
+				OpenDB().Product.UpdateById(product);
+
+				return product;
+			}
+			catch (Exception)
+			{
+				throw new DataBaseException();
+			}
 		}
 
 		public IList<Product> LoadAll()
@@ -85,12 +96,26 @@ namespace CoolBlueTask.Products
 
 		public bool Exists(string productId)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return (bool)OpenDB().Product.ExistsById(productId);
+			}
+			catch (Exception)
+			{
+				throw new DataBaseException();
+			}
 		}
 
 		public Product LoadById(string id)
 		{
-			throw new NotImplementedException();
+			try
+			{
+				return (Product)OpenDB().Product.FindById(id);
+			}
+			catch (Exception)
+			{
+				throw new DataBaseException();
+			}
 		}
 	}
 }

@@ -10,16 +10,18 @@ namespace CoolBlueTask.Tests.Products
 {
 	public class ProductRepositoryIntegrationTests
 	{
+		private readonly ProductRepository sut;
+
 		public ProductRepositoryIntegrationTests()
 		{
 			var adapter = new InMemoryAdapter();
 			Database.UseMockAdapter(adapter);
+			sut = new ProductRepository();
 		}
 
 		[Theory]
 		[AutoNSubstituteData]
-		public void add_load_all_integration(
-			ProductRepository sut,
+		public void save_load_all_integration(
 			Product product1,
 			Product product2)
 		{
@@ -39,7 +41,6 @@ namespace CoolBlueTask.Tests.Products
 		[Theory]
 		[AutoNSubstituteData]
 		public void search_integration(
-			ProductRepository sut,
 			Product product1,
 			Product product2,
 			Product product3,
@@ -65,6 +66,40 @@ namespace CoolBlueTask.Tests.Products
 			actual.ShouldAllBeEquivalentTo(
 				expected,
 				options => options.Excluding(o => o.Id));
+		}
+
+		[Theory]
+		[AutoNSubstituteData]
+		public void update_load_by_id_integration(
+			Product product1,
+			Product product2)
+		{
+			// Arrange
+			var id1 = sut.Save(product1).Id;
+			var expected = product2;
+			expected.Id = id1;
+
+			// Act
+			sut.Update(id1, product2);
+			var actual = sut.LoadById(id1);
+
+			// Assert
+			actual.ShouldBeEquivalentTo(expected);
+		}
+
+		[Theory]
+		[AutoNSubstituteData]
+		public void usave_exist_integration(
+			Product newProduct)
+		{
+			// Arrange
+			var productId = sut.Save(newProduct).Id;
+
+			// Act
+			// Assert
+			sut.Exists(productId)
+				.Should()
+				.BeTrue();
 		}
 	}
 }

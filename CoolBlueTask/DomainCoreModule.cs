@@ -8,6 +8,9 @@ namespace CoolBlueTask
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
+			builder.RegisterInstance(new ApiConfiguration()).As<IApiConfiguration>()
+				.SingleInstance();
+
 			// Dto-Entity Mapper
 			// Scan this assembly and add all mapping profiles to the configuration:
 			// Executes constructors of each class that populates from AutoMapper.Profile class

@@ -52,26 +52,6 @@ namespace CoolBlueTask.Tests
 		}
 
 		[Fact]
-		public void mapper_is_registered()
-		{
-			// Act
-			var actual = container.Resolve<IMapper>();
-
-			// Assert
-			actual.Should().NotBeNull();
-		}
-
-		[Fact]
-		public void logger_is_registered()
-		{
-			// Act
-			var actual = container.Resolve<ILogger>();
-
-			// Assert
-			actual.Should().NotBeNull();
-		}
-
-		[Fact]
 		public void api_exception_filter_registered()
 		{
 			// Arrange

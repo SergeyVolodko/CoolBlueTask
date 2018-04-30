@@ -1,9 +1,11 @@
+using System.Text;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.Jwt;
 using Owin;
 
 [assembly: OwinStartup(typeof(CoolBlueTask.Startup))]
@@ -37,7 +39,26 @@ namespace CoolBlueTask
 
 			config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
+			//configureAuthZero(app, container);
+
 			app.UseWebApi(config);
+		}
+
+
+		private static void configureAuthZero(IAppBuilder app, IContainer container)
+		{
+			var config = container.Resolve<IApiConfiguration>();
+			app.UseJwtBearerAuthentication(
+				new JwtBearerAuthenticationOptions
+				{
+					AuthenticationMode = Microsoft.Owin.Security.AuthenticationMode.Active,
+					AllowedAudiences = new[] { config.Auth0Audience },
+					IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
+					{
+						new SymmetricKeyIssuerSecurityTokenProvider(config.Auth0Issuer,
+							Encoding.UTF8.GetBytes(config.Auth0Secret))
+					}
+				});
 		}
 	}
 }

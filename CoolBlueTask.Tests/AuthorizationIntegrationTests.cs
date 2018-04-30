@@ -1,6 +1,7 @@
 using System;
 using System.Net;
 using System.Net.Http;
+using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using Microsoft.Owin.Hosting;
 using Owin;
@@ -19,7 +20,8 @@ namespace CoolBlueTask.Tests
 
 		public AuthorizationIntegrationTests()
 		{
-			var startup = new Startup(/*new TestApiConfiguration()*/);
+			var startup = new Startup();
+			startup.apiConfiguration = new TestApiConfiguration();
 			action = new Action<IAppBuilder>(startup.Configuration);
 		}
 

@@ -6,9 +6,8 @@ using System.Reflection;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using AutoMapper;
+using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
-using NLog;
 using NSubstitute;
 using Xunit;
 using Owin;
@@ -27,6 +26,7 @@ namespace CoolBlueTask.Tests
 		public StartupIntegrationTests()
 		{
 			startup = new Startup();
+			startup.apiConfiguration = new TestApiConfiguration();
 			startup.Configuration(Substitute.For<IAppBuilder>());
 			container = startup.container;
 		}
@@ -64,5 +64,17 @@ namespace CoolBlueTask.Tests
 				actual.Should().NotBeNull();
 			}
 		}
+
+		//[Fact]
+		//public void configuration_is_registered_and_singleton()
+		//{
+		//	// Act
+		//	var configuration1 = container.Resolve<IApiConfiguration>();
+		//	var configuration2 = container.Resolve<IApiConfiguration>();
+
+		//	// Assert
+		//	configuration1.Should().BeOfType<ApiConfiguration>();
+		//	configuration2.Should().Be(configuration1);
+		//}
 	}
 }

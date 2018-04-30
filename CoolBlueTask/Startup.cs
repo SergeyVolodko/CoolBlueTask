@@ -17,6 +17,7 @@ namespace CoolBlueTask
 		/// Exposed for test purposes
 		/// </summary>
 		internal IContainer container;
+		internal IApiConfiguration apiConfiguration;
 
 		public void Configuration(IAppBuilder app)
 		{
@@ -25,7 +26,15 @@ namespace CoolBlueTask
 
 			SwaggerConfig.Register(config);
 
+			if (apiConfiguration == null)
+			{
+				apiConfiguration = new ApiConfiguration();
+			}
+
 			var builder = new ContainerBuilder();
+
+			builder.RegisterInstance(apiConfiguration).As<IApiConfiguration>()
+				.SingleInstance();
 
 			builder.RegisterModule(new DomainCoreModule());
 			builder.RegisterModule(new ProductModule());
@@ -39,7 +48,7 @@ namespace CoolBlueTask
 
 			config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
 
-			//configureAuthZero(app, container);
+			configureAuthZero(app, container);
 
 			app.UseWebApi(config);
 		}
@@ -58,7 +67,8 @@ namespace CoolBlueTask
 						new SymmetricKeyIssuerSecurityTokenProvider(config.Auth0Issuer,
 							Encoding.UTF8.GetBytes(config.Auth0Secret))
 					}
-				});
+				}
+				);
 		}
 	}
 }

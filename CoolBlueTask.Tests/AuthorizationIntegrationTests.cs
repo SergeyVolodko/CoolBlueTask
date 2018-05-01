@@ -67,25 +67,25 @@ namespace CoolBlueTask.Tests
 			}
 		}
 
-		//[Fact]
-		//public async void authorization_happy_path()
-		//{
-		//	// arrange
-		//	var url = baseAddr + "/version/testtenant";
+		[Fact]
+		public async void authorization_happy_path()
+		{
+			// arrange
+			var url = baseAddr + "/version/testauth";
 
-		//	var token = JwtTokenUtils.GenerateToken(configuration, "Some User");
+			var token = JwtTokenUtils.GenerateToken(configuration, "Some User");
 
-		//	using (var server = WebApp.Start(baseAddr, action))
-		//	using (var client = new HttpClient())
-		//	{
-		//		client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+			using (var server = WebApp.Start(baseAddr, action))
+			using (var client = new HttpClient())
+			{
+				client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
 
-		//		// Act
-		//		var actual = await client.GetAsync(url);
+				// Act
+				var actual = await client.GetAsync(url);
 
-		//		// Assert
-		//		actual.StatusCode.Should().Be(HttpStatusCode.OK);
-		//	}
-		//}
+				// Assert
+				actual.StatusCode.Should().Be(HttpStatusCode.OK);
+			}
+		}
 	}
 }

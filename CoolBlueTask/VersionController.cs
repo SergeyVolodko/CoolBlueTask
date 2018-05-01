@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;
@@ -17,8 +18,8 @@ namespace CoolBlueTask
 		}
 
 		[HttpGet]
-		[Auth0Authorization]
 		[Route("testauth")]
+		[Auth0Authorization]
 		public string TestAuth()
 		{
 			var version = Assembly.GetExecutingAssembly().GetName().Version;

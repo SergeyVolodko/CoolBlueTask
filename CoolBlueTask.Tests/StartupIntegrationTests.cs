@@ -8,6 +8,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using Microsoft.Owin.Builder;
 using NSubstitute;
 using Xunit;
 using Owin;
@@ -25,8 +26,7 @@ namespace CoolBlueTask.Tests
 		/// </summary>
 		public StartupIntegrationTests()
 		{
-			startup = new Startup();
-			startup.apiConfiguration = new TestApiConfiguration();
+			startup = new Startup {apiConfiguration = new TestApiConfiguration()};
 			startup.Configuration(Substitute.For<IAppBuilder>());
 			container = startup.container;
 		}

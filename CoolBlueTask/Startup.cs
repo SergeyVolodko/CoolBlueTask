@@ -2,6 +2,7 @@ using System.Text;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
 using Microsoft.Owin;
@@ -41,8 +42,10 @@ namespace CoolBlueTask
 			builder.RegisterModule(new SalesCombinationsModule());
 			builder.RegisterType<VersionController>();
 
+			// Critical to make filters work
+			builder.RegisterWebApiFilterProvider(config);
 			builder.RegisterType<ApiExceptionFilterAttribute>()
-				.AsWebApiExceptionFilterFor<ApiController>();
+				.AsWebApiExceptionFilterFor<VersionController>();
 
 			container = builder.Build();
 

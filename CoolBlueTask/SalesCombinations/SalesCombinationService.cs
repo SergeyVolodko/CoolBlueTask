@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AutoMapper;
 using CoolBlueTask.Products;
@@ -17,15 +16,18 @@ namespace CoolBlueTask.SalesCombinations
 	{
 		private readonly ISalesCombinationRepository combinationRepository;
 		private readonly IProductRepository productRepository;
+		private readonly ISalesCombinationBuilder combinationBuilder;
 		private readonly IMapper mapper;
 
 		public SalesCombinationService(
 			ISalesCombinationRepository combinationRepository,
 			IProductRepository productRepository,
+			ISalesCombinationBuilder combinationBuilder,
 			IMapper mapper)
 		{
 			this.combinationRepository = combinationRepository;
 			this.productRepository = productRepository;
+			this.combinationBuilder = combinationBuilder;
 			this.mapper = mapper;
 		}
 
@@ -47,7 +49,16 @@ namespace CoolBlueTask.SalesCombinations
 		public SalesCombinationReadDto CreateSalesCombination(
 			SalesCombinationWriteDto combination)
 		{
-			throw new NotImplementedException();
+			var newCombination = combinationBuilder
+				.CreateForProduct(combination.MainProductId)
+				.WithRelatedProducts(combination.RelatedProducts)
+				.Build();
+
+			var createdCombination = combinationRepository
+				.Save(newCombination);
+
+			return mapper
+				.Map<SalesCombination, SalesCombinationReadDto>(createdCombination);
 		}
 	}
 }

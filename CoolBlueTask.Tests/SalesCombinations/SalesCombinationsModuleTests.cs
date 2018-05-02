@@ -52,6 +52,16 @@ namespace CoolBlueTask.Tests.Products
 		//}
 
 		[Fact]
+		public void combination_builder_is_registered()
+		{
+			// Act
+			var builder = container.Resolve<ISalesCombinationBuilder>();
+
+			// Assert
+			builder.Should().BeOfType<SalesCombinationBuilder>();
+		}
+
+		[Fact]
 		public void service_is_registered()
 		{
 			// Act

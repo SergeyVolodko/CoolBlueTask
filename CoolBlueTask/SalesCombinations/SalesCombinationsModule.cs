@@ -15,6 +15,9 @@ namespace CoolBlueTask.SalesCombinations
 			//builder.RegisterType<ProductValidator>()
 			//	.As<AbstractValidator<Product>>();
 
+			builder.RegisterType<SalesCombinationBuilder>()
+				.As<ISalesCombinationBuilder>();
+
 			builder.RegisterType<SalesCombinationService>()
 				.As<ISalesCombinationService>();
 

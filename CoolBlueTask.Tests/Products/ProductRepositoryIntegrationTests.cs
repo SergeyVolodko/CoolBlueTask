@@ -89,7 +89,7 @@ namespace CoolBlueTask.Tests.Products
 
 		[Theory]
 		[AutoNSubstituteData]
-		public void usave_exist_integration(
+		public void save_exist_integration(
 			Product newProduct)
 		{
 			// Arrange

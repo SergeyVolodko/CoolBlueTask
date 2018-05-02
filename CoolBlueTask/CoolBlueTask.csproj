@@ -236,6 +236,7 @@
     <Compile Include="SalesCombinations\Models\SalesCombinationMappingProfile.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDto.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationWriteDto.cs" />
+    <Compile Include="SalesCombinations\SalesCombinationBuilder.cs" />
     <Compile Include="SalesCombinations\SalesCombinationRepository.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombination.cs" />
     <Compile Include="SalesCombinations\SalesCombinationController.cs" />

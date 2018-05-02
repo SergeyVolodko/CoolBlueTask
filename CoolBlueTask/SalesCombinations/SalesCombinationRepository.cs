@@ -7,6 +7,8 @@ namespace CoolBlueTask.SalesCombinations
 {
 	public interface ISalesCombinationRepository
 	{
+		SalesCombination Save(SalesCombination salesCombination);
+
 		IList<SalesCombination> LoadByProduct(string productId);
 	}
 
@@ -39,13 +41,15 @@ namespace CoolBlueTask.SalesCombinations
 			return null;
 		}
 
-		public void Save(SalesCombination salesCombination)
+		public SalesCombination Save(SalesCombination salesCombination)
 		{
 			try
 			{
 				salesCombination.Id = Guid.NewGuid().ToString();
 
 				OpenDB().SalesCombination.Insert(salesCombination);
+
+				return salesCombination;
 			}
 			catch (Exception)
 			{

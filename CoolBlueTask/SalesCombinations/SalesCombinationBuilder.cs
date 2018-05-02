@@ -1,6 +1,7 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoolBlueTask.Products;
+using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations.Models;
 using FluentValidation;
 
@@ -25,7 +26,7 @@ namespace CoolBlueTask.SalesCombinations
 		{
 			this.productRepository = productRepository;
 
-			combination = new SalesCombination();
+			combination = new SalesCombination { RelatedProducts = new List<Product>()};
 		}
 
 		public ISalesCombinationBuilder WithMainProduct(
@@ -44,9 +45,30 @@ namespace CoolBlueTask.SalesCombinations
 			return this;
 		}
 
-		public ISalesCombinationBuilder WithRelatedProducts(IList<string> relatedProductsIds)
+		public ISalesCombinationBuilder WithRelatedProducts(
+			IList<string> relatedProductsIds)
 		{
-			throw new NotImplementedException();
+			if (relatedProductsIds.Count == 0)
+			{
+				throw new ValidationException("Related products can't be empty.");
+			}
+			if (relatedProductsIds.Any(string.IsNullOrWhiteSpace))
+			{
+				throw new ValidationException("A related product id is missing.");
+			}
+			if (relatedProductsIds.Any(i => !productRepository.Exists(i)))
+			{
+				throw new ValidationException("A related product does not exist");
+			}
+
+			foreach (var productsId in relatedProductsIds)
+			{
+				var product = productRepository.LoadById(productsId);
+
+				combination.RelatedProducts.Add(product);
+			}
+
+			return this;
 		}
 
 		public SalesCombination Build()

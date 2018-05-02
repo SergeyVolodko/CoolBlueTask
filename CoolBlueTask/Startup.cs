@@ -44,7 +44,7 @@ namespace CoolBlueTask
 			// Critical to make filters work
 			builder.RegisterWebApiFilterProvider(config);
 			builder.RegisterType<ApiExceptionFilterAttribute>()
-				.AsWebApiExceptionFilterFor<VersionController>();
+				.AsWebApiExceptionFilterFor<ApiController>();
 
 			container = builder.Build();
 
@@ -54,7 +54,6 @@ namespace CoolBlueTask
 
 			app.UseWebApi(config);
 		}
-
 
 		private static void configureAuthZero(IAppBuilder app, IContainer container)
 		{

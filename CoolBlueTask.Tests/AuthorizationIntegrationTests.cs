@@ -70,7 +70,7 @@ namespace CoolBlueTask.Tests
 		[Fact]
 		public async void authorization_happy_path()
 		{
-			// arrange
+			// Arrange
 			var url = baseAddr + "/version/testauth";
 
 			var token = JwtTokenUtils.GenerateToken(configuration, "Some User");

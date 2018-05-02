@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations.Models;
 using Simple.Data;
 
@@ -28,17 +30,34 @@ namespace CoolBlueTask.SalesCombinations
 
 		public IList<SalesCombination> LoadByProduct(string productId)
 		{
-			//try
-			//{
-			//	var db = OpenDB();
-			//	var expr = db.SalesCombination.Products.Like("%" + productId + "%");
-			//	return (List<SalesCombination>)db.SalesCombination.FindAll(expr);
-			//}
-			//catch (Exception)
-			//{
-			//	throw new DataBaseException();
-			//}
-			return null;
+			try
+			{
+				var db = OpenDB();
+				var expr = db.SalesCombination.MainProductId.Like("%" + productId + "%");
+				var combinations = (List<SalesCombinationDbo>) db.SalesCombination.FindAll(expr);
+
+				var result = new List<SalesCombination>();
+				foreach (var combination in combinations)
+				{
+					var mainProduct = (Product)db.Product.FindById(combination.MainProductId);
+					var relatedProductsIds = combination.RelatedProducts.Split('|').ToList();
+					var relatedProducts = relatedProductsIds
+						.Select(id => (Product)db.Product.FindById(id)).ToList();
+
+					result.Add(new SalesCombination
+					{
+						Id = combination.Id,
+						MainProduct = mainProduct,
+						RelatedProducts = relatedProducts
+					});
+				}
+
+				return result;
+			}
+			catch (Exception)
+			{
+				throw new DataBaseException();
+			}
 		}
 
 		public SalesCombination Save(SalesCombination salesCombination)
@@ -47,7 +66,15 @@ namespace CoolBlueTask.SalesCombinations
 			{
 				salesCombination.Id = Guid.NewGuid().ToString();
 
-				OpenDB().SalesCombination.Insert(salesCombination);
+				var dbo = new SalesCombinationDbo
+				{
+					Id = salesCombination.Id,
+					MainProductId = salesCombination.MainProduct.Id,
+					RelatedProducts = string.Join("|", 
+						salesCombination.RelatedProducts.Select(p => p.Id))
+				};
+
+				OpenDB().SalesCombination.Insert(dbo);
 
 				return salesCombination;
 			}

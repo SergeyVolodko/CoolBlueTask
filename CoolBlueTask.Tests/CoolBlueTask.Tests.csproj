@@ -267,6 +267,7 @@
     <Compile Include="SalesCombinations\Models\MappingTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationWriteDtoTests.cs" />
     <Compile Include="SalesCombinations\Models\SalesCombinationReadDtoTests.cs" />
+    <Compile Include="SalesCombinations\SalesCombinationRepositoryIntegrationTests.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />
     <Compile Include="SalesCombinations\Service\CreateSalesCombinationTests.cs" />
     <Compile Include="SalesCombinations\Service\GetCombinationsForProductTests.cs" />

@@ -29,7 +29,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 			// Assert
 			Received.InOrder(() =>
 			{
-				builder.CreateForProduct(combinationDto.MainProductId);
+				builder.WithMainProduct(combinationDto.MainProductId);
 				builder.WithRelatedProducts(combinationDto.RelatedProducts);
 				builder.Build();
 			});
@@ -108,7 +108,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 
 		private void MockBuilder(ISalesCombinationBuilder builder)
 		{
-			builder.CreateForProduct(Arg.Any<string>())
+			builder.WithMainProduct(Arg.Any<string>())
 				.Returns(builder);
 			builder.WithRelatedProducts(Arg.Any<IList<string>>())
 				.Returns(builder);

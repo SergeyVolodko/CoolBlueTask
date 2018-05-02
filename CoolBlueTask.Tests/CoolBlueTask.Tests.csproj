@@ -251,6 +251,7 @@
     <Compile Include="Products\Controller\GetAllProductsTests.cs" />
     <Compile Include="Products\Service\UpdateProductTests.cs" />
     <Compile Include="Products\Service\GetProductByIdTests.cs" />
+    <Compile Include="SalesCombinations\Builder\WithMainProductTests.cs" />
     <Compile Include="SalesCombinations\Controller\CreateSalesCombination.cs" />
     <Compile Include="SalesCombinations\Controller\GetProductSalesCombinations.cs" />
     <Compile Include="Products\Controller\SearchProductsTests.cs" />

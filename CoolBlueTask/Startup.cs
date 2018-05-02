@@ -2,7 +2,6 @@ using System.Text;
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using CoolBlueTask.Api.Core;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
 using Microsoft.Owin;

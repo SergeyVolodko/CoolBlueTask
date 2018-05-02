@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.SalesCombinations.Models;
 
 namespace CoolBlueTask.SalesCombinations
@@ -15,6 +16,7 @@ namespace CoolBlueTask.SalesCombinations
 		}
 
 		[HttpPost]
+		[Auth0Authorization]
 		[Route("sales_combinations")]
 		public SalesCombinationReadDto CreateCombination(
 			[FromBody]SalesCombinationWriteDto combination)

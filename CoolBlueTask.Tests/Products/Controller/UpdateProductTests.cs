@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.Tests.Infrastructure;
@@ -27,6 +29,22 @@ namespace CoolBlueTask.Tests.Products.Controller
 			// Asserts
 			route.Controller.Should().Be<ProductController>();
 			route.Action.Should().Be("UpdateProduct");
+		}
+
+		[Fact]
+		public void has_authorization_attribute()
+		{
+			// Arrange
+			var method = typeof(ProductController)
+				.Methods()
+				.FirstOrDefault(m => m.Name == "UpdateProduct");
+
+			// Act
+			var attributes = method.GetCustomAttributes(false);
+
+			// Assert
+			attributes.Should()
+				.Contain(a => a is Auth0AuthorizationAttribute);
 		}
 
 		[Theory]

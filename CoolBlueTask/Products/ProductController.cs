@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Web.Http;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.Products.Models;
 
 namespace CoolBlueTask.Products
@@ -16,6 +17,7 @@ namespace CoolBlueTask.Products
 		}
 
 		[HttpPost]
+		[Auth0Authorization]
 		[Route("")]
 		public ProductReadDto CreateProduct(
 			[FromBody]ProductWriteDto product)
@@ -24,6 +26,7 @@ namespace CoolBlueTask.Products
 		}
 
 		[HttpPut]
+		[Auth0Authorization]
 		[Route("{id}")]
 		public ProductReadDto UpdateProduct(
 			string id,

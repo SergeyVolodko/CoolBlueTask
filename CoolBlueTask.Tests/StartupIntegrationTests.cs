@@ -64,17 +64,5 @@ namespace CoolBlueTask.Tests
 				actual.Should().NotBeNull();
 			}
 		}
-
-		//[Fact]
-		//public void configuration_is_registered_and_singleton()
-		//{
-		//	// Act
-		//	var configuration1 = container.Resolve<IApiConfiguration>();
-		//	var configuration2 = container.Resolve<IApiConfiguration>();
-
-		//	// Assert
-		//	configuration1.Should().BeOfType<ApiConfiguration>();
-		//	configuration2.Should().Be(configuration1);
-		//}
 	}
 }

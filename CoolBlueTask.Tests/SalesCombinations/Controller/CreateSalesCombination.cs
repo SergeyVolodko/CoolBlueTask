@@ -1,5 +1,7 @@
+using System.Linq;
 using System.Net.Http;
 using System.Web.Http;
+using CoolBlueTask.Api.Core;
 using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.SalesCombinations.Models;
 using CoolBlueTask.Tests.Infrastructure;
@@ -27,6 +29,22 @@ namespace CoolBlueTask.Tests.SalesCombinations.Controller
 			// Asserts
 			route.Controller.Should().Be<SalesCombinationController>();
 			route.Action.Should().Be("CreateCombination");
+		}
+
+		[Fact]
+		public void has_authorization_attribute()
+		{
+			// Arrange
+			var method = typeof(SalesCombinationController)
+				.Methods()
+				.FirstOrDefault(m => m.Name == "CreateCombination");
+
+			// Act
+			var attributes = method.GetCustomAttributes(false);
+
+			// Assert
+			attributes.Should()
+				.Contain(a => a is Auth0AuthorizationAttribute);
 		}
 
 		[Theory]

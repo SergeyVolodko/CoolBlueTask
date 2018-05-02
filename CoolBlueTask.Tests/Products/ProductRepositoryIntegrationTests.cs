@@ -16,7 +16,7 @@ namespace CoolBlueTask.Tests.Products
 		{
 			var adapter = new InMemoryAdapter();
 			Database.UseMockAdapter(adapter);
-			sut = new ProductRepository();
+			sut = new ProductRepository(new TestApiConfiguration());
 		}
 
 		[Theory]

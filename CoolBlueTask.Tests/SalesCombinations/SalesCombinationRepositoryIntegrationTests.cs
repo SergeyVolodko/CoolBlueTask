@@ -17,10 +17,12 @@ namespace CoolBlueTask.Tests.SalesCombinations
 
 		public SalesCombinationRepositoryIntegrationTests()
 		{
+			var config = new TestApiConfiguration();
+
 			var adapter = new InMemoryAdapter();
 			Database.UseMockAdapter(adapter);
-			sut = new SalesCombinationRepository();
-			productRepo = new ProductRepository();
+			sut = new SalesCombinationRepository(config);
+			productRepo = new ProductRepository(config);
 		}
 
 		[Theory]

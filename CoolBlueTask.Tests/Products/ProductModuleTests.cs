@@ -1,6 +1,7 @@
 using Autofac;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
+using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using FluentValidation;
 using Xunit;
@@ -14,6 +15,7 @@ namespace CoolBlueTask.Tests.Products
 		public ProductModuleTests()
 		{
 			var builder = new ContainerBuilder();
+			builder.RegisterInstance(new TestApiConfiguration()).As<IApiConfiguration>();
 			builder.RegisterModule(new DomainCoreModule());
 			builder.RegisterModule(new ProductModule());
 			container = builder.Build();
@@ -63,6 +65,8 @@ namespace CoolBlueTask.Tests.Products
 		[Fact]
 		public void controller_is_registered()
 		{
+			// Act
+			// Assert
 			container.Resolve<ProductController>()
 				.Should()
 				.NotBeNull();

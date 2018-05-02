@@ -18,9 +18,9 @@ namespace CoolBlueTask.SalesCombinations
 	{
 		private readonly string connectionString;
 
-		public SalesCombinationRepository(string connectionString = null)
+		public SalesCombinationRepository(IApiConfiguration configuration)
 		{
-			this.connectionString = connectionString;
+			this.connectionString = configuration.DbConnectionString;
 		}
 
 		private dynamic OpenDB()

@@ -20,9 +20,9 @@ namespace CoolBlueTask.Products
 	{
 		private readonly string connectionString;
 
-		public ProductRepository(string connectionString = null)
+		public ProductRepository(IApiConfiguration configuration)
 		{
-			this.connectionString = connectionString;
+			this.connectionString = configuration.DbConnectionString;
 
 			// Mocking with in-memory DB;
 			var adapter = new InMemoryAdapter();

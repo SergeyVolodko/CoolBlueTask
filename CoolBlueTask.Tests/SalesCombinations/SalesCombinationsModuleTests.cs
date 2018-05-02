@@ -1,11 +1,11 @@
 using Autofac;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
+using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
-using FluentValidation;
 using Xunit;
 
-namespace CoolBlueTask.Tests.Products
+namespace CoolBlueTask.Tests.SalesCombinations
 {
 	public class SalesCombinationsModuleTests
 	{
@@ -14,6 +14,7 @@ namespace CoolBlueTask.Tests.Products
 		public SalesCombinationsModuleTests()
 		{
 			var builder = new ContainerBuilder();
+			builder.RegisterInstance(new TestApiConfiguration()).As<IApiConfiguration>();
 			builder.RegisterModule(new DomainCoreModule());
 			builder.RegisterModule(new ProductModule());
 			builder.RegisterModule(new SalesCombinationsModule());
@@ -41,16 +42,6 @@ namespace CoolBlueTask.Tests.Products
 			repo1.Should().Be(repo2);
 		}
 
-		//[Fact]
-		//public void validator_is_registered()
-		//{
-		//	// Act
-		//	var validator = container.Resolve<AbstractValidator<SalesCombination>>();
-
-		//	// Assert
-		//	//validator.Should().BeOfType<ProductValidator>();
-		//}
-
 		[Fact]
 		public void combination_builder_is_registered()
 		{
@@ -74,6 +65,8 @@ namespace CoolBlueTask.Tests.Products
 		[Fact]
 		public void controller_is_registered()
 		{
+			// Act
+			// Assert
 			container.Resolve<SalesCombinationController>()
 				.Should()
 				.NotBeNull();

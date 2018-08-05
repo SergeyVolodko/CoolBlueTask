@@ -10,13 +10,13 @@ Scenario: Add new product
 	And product card has all provided details of 'The book'
 
 Scenario: Edit product
-	Given Jeff has a product in his shop
-	When he updates all its details
+	Given Jeff has product 'Teapot' in his shop
+	When he changes all its details
 	Then he sees the updated product card
 
 Scenario Outline: Add invalid product
 	When Jeff tries to add a new product with <Invalid inputs>
-	Then he sees the list of respective errors
+	Then he should see the list of respective errors
 
 Examples: Validation violation cases
 	| Invalid inputs                |
@@ -24,9 +24,9 @@ Examples: Validation violation cases
 	| Invalid values for all fields |
 
 Scenario Outline: Update product with invalid data
-	Given Jeff has a product in his shop
+	Given Jeff has product 'CD-player' in his shop
 	When Jeff tries to update this product with <Invalid inputs>
-	Then he sees the the list of respective errors
+	Then he should see the list of respective errors
 
 Examples: Validation violation cases
 	| Invalid inputs                |

@@ -171,6 +171,27 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProductAdministration.feature.cs</LastGenOutput>
     </None>
+    <None Include="test_files\Products\product_all_fields_invalid_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\product_empty_input_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\product_empty_input_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\product_all_fields_invalid_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\update_product_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\update_product_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\existing_product_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="test_files\Products\new_product_response.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace CoolBlueTask.Tests.Scenarios.Data
@@ -9,6 +10,13 @@ namespace CoolBlueTask.Tests.Scenarios.Data
 	{
 		public HttpStatusCode StatusCode { get; set; }
 		public string Content { get; set; }
+
+		public string ContentAsFormattedJson {
+			get
+			{
+				return JToken.Parse(Content).ToString(Formatting.Indented);
+			}
+		}
 
 		public TypedResponse(HttpResponseMessage response)
 		{

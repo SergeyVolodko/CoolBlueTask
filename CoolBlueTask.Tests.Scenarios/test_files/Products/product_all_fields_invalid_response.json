@@ -1,0 +1,12 @@
+[
+  {
+    "property_name": "Name",
+    "error_code": "notempty_error",
+    "error_message": "'Name' should not be empty."
+  },
+  {
+    "property_name": "Price",
+    "error_code": "greaterthanorequal_error",
+    "error_message": "'Price' must be greater than or equal to '0'."
+  }
+]

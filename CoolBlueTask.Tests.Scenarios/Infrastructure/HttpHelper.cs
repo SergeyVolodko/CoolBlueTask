@@ -1,5 +1,8 @@
 using System.Net.Http;
+using System.Text;
 using CoolBlueTask.Tests.Scenarios.Data;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 {
@@ -34,7 +37,9 @@ namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 
 			var response = client.GetAsync(url).Result;
 
-			return response.Content.ReadAsStringAsync().Result;
+			var json = response.Content.ReadAsStringAsync().Result;
+
+			return formatJson(json);
 		}
 
 		public TypedResponse Get(
@@ -48,6 +53,27 @@ namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 			var response = client.GetAsync(url).Result;
 
 			return new TypedResponse(response);
+		}
+
+		public TypedResponse PostJson(
+			string endpoint,
+			string json,
+			string token)
+		{
+			resetClientHeaders(token);
+
+			var url = $"{baseAddress}{endpoint}";
+
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = client.PostAsync(url, content).Result;
+
+			return new TypedResponse(response);
+		}
+
+		private string formatJson(string json)
+		{
+			return JValue.Parse(json).ToString(Formatting.Indented);
 		}
 	}
 }

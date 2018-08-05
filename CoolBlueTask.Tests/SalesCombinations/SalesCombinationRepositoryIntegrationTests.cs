@@ -27,7 +27,7 @@ namespace CoolBlueTask.Tests.SalesCombinations
 
 		[Theory]
 		[AutoNSubstituteData]
-		public void save_load_by_product_integration(
+		public void save_and_load_by_product_integration(
 			Product product1,
 			Product product2,
 			Product product3)

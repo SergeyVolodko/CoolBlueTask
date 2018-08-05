@@ -147,6 +147,14 @@
     <Compile Include="Data\TypedResponse.cs" />
     <Compile Include="Infrastructure\BeforeTestRunPreparations.cs" />
     <Compile Include="Infrastructure\HttpHelper.cs" />
+    <Compile Include="Infrastructure\ScenariosHelper.cs" />
+    <Compile Include="Infrastructure\TwoJsonsApprovalFileWriter.cs" />
+    <Compile Include="Products\ProductAdministration.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductAdministration.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Products\ProductAdministrationSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecFlow.xUnitAdapter.Config.cs" />
     <Compile Include="VersionCheck\VersionCheck.feature.cs">
@@ -159,6 +167,16 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="Products\ProductAdministration.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ProductAdministration.feature.cs</LastGenOutput>
+    </None>
+    <None Include="test_files\Products\new_product_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\Products\new_product_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="VersionCheck\VersionCheck.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>VersionCheck.feature.cs</LastGenOutput>
@@ -173,6 +191,7 @@
       <Name>CoolBlueTask</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SpecFlow.2.3.2\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.3.2\build\SpecFlow.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

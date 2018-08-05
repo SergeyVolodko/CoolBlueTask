@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;
 using CoolBlueTask.Products.Models;
@@ -19,10 +21,12 @@ namespace CoolBlueTask.Products
 		[HttpPost]
 		[Auth0Authorization]
 		[Route("")]
-		public ProductReadDto CreateProduct(
+		public HttpResponseMessage CreateProduct(
 			[FromBody]ProductWriteDto product)
 		{
-			return service.CreateProduct(product);
+			var created =  service.CreateProduct(product);
+
+			return Request.CreateResponse(HttpStatusCode.Created, created);
 		}
 
 		[HttpPut]

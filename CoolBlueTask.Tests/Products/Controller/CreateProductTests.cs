@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;
@@ -6,6 +7,7 @@ using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using Newtonsoft.Json;
 using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
@@ -75,10 +77,16 @@ namespace CoolBlueTask.Tests.Products.Controller
 				.Returns(createdProduct);
 
 			// Act
-			var actual = sut.CreateProduct(product);
+			var response = sut.CreateProduct(product);
 
 			// Asserts
-			actual.ShouldBeEquivalentTo(createdProduct);
+			response.StatusCode.Should().Be(HttpStatusCode.Created);
+
+			var content = response.Content.ReadAsStringAsync()
+				.GetAwaiter().GetResult();
+
+			JsonConvert.DeserializeObject<ProductReadDto>(content)
+				.ShouldBeEquivalentTo(createdProduct);
 		}
 	}
 }

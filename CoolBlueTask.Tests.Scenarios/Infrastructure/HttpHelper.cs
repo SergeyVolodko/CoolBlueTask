@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using CoolBlueTask.Tests.Scenarios.Data;
+using Flurl;
 
 namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 {
@@ -49,6 +51,35 @@ namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 			var response = client.GetAsync(url).Result;
 
 			return new TypedResponse(response);
+		}
+
+		public TypedResponse<T> Get<T>(
+			string endpoint,
+			string token) where T : new()
+		{
+			resetClientHeaders(token);
+
+			var url = $"{baseAddress}{endpoint}";
+
+			var response = client.GetAsync(url).Result;
+
+			return new TypedResponse<T>(response);
+		}
+
+		public TypedResponse<T> GetWithQueryParams<T>(
+			string endpoint,
+			IDictionary<string, string> queryParams,
+			string token) where T : new()
+		{
+			resetClientHeaders(token);
+
+			var url = $"{baseAddress}{endpoint}";
+
+			var urlWithQuery = url.SetQueryParams(queryParams);
+
+			var response = client.GetAsync(urlWithQuery).Result;
+
+			return new TypedResponse<T>(response);
 		}
 
 		public TypedResponse PostJson(

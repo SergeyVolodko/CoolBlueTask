@@ -1,12 +1,13 @@
 ## Simple CRUD API
 
 This project demonstrates production-level code I write in everyday work.
+
 Covered topics:
 1. Production-ready Api code and infrastructure
 2. CRUD functionality of primitive Web shop with only Products and Sales combinations. Ready for extension.
 
 The application has classic N-tier architecture with Controllers, Services and Repository layers.
-Coding is done sticking to TDD so every row of the code has it's own test before it got written.
+Coding is done sticking to TDD so every row of the code has it's own test before it got actually written.
 
 ## Used tools and open-source dependencies
 ### Infrustructure
@@ -20,4 +21,5 @@ Coding is done sticking to TDD so every row of the code has it's own test before
 - Testing libs `xUnit`, `AutoFixture`, `NSubstitute` and `ApprovalTests`
 - Mappings handled using `AutoMapper` lib
 - Validations implemented with `FluentValidations`
-- Repository layer works against SQLite database (InMemory for better flexibility). Functionality proved with [integration tests](https://github.com/SergeyVolodko/CoolBlueTask/blob/master/CoolBlueTask.Tests/Products/ProductRepositoryIntegrationTests.cs)
+- Repository layer works against SQLite database (InMemory for flexibility). Utilizing micro ORM `Simple.Data`
+Functionality proved with [integration tests](https://github.com/SergeyVolodko/CoolBlueTask/blob/master/CoolBlueTask.Tests/Products/ProductRepositoryIntegrationTests.cs)

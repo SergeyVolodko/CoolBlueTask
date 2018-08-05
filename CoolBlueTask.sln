@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolBlueTask", "CoolBlueTas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolBlueTask.Tests", "CoolBlueTask.Tests\CoolBlueTask.Tests.csproj", "{BDB7F47D-DC13-41EF-8549-104112AC3B98}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolBlueTask.Tests.Scenarios", "CoolBlueTask.Tests.Scenarios\CoolBlueTask.Tests.Scenarios.csproj", "{8A179490-3DCD-4411-BD24-C59D81057DB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BDB7F47D-DC13-41EF-8549-104112AC3B98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB7F47D-DC13-41EF-8549-104112AC3B98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB7F47D-DC13-41EF-8549-104112AC3B98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A179490-3DCD-4411-BD24-C59D81057DB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A179490-3DCD-4411-BD24-C59D81057DB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A179490-3DCD-4411-BD24-C59D81057DB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A179490-3DCD-4411-BD24-C59D81057DB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

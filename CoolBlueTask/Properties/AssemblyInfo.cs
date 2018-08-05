@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 
 // Make internals unit-testable
 [assembly: InternalsVisibleTo("CoolBlueTask.Tests")]
+[assembly: InternalsVisibleTo("CoolBlueTask.Tests.Scenarios")]

@@ -41,7 +41,7 @@ namespace CoolBlueTask.Tests
 		//	// Arrange
 		//	var baseAddress = "http://localhost:11111";
 		//	var startup = new Startup { apiConfiguration = new TestApiConfiguration() };
-			
+
 		//	//startup.Configuration(Substitute.For<IAppBuilder>());
 		//	action = startup.Configuration;
 

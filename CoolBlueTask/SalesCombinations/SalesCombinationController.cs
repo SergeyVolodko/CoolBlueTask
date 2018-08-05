@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;
 using CoolBlueTask.SalesCombinations.Models;
@@ -18,10 +20,12 @@ namespace CoolBlueTask.SalesCombinations
 		[HttpPost]
 		[Auth0Authorization]
 		[Route("sales_combinations")]
-		public SalesCombinationReadDto CreateCombination(
+		public HttpResponseMessage CreateCombination(
 			[FromBody]SalesCombinationWriteDto combination)
 		{
-			return service.CreateSalesCombination(combination);
+			var createdCombination =  service.CreateSalesCombination(combination);
+
+			return Request.CreateResponse(HttpStatusCode.Created, createdCombination);
 		}
 
 		[HttpGet]

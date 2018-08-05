@@ -1,5 +1,5 @@
 Feature: ProductBrowsing
-	In order to buy more things from web shop
+	In order to buy more goods from web shop
 	As a consumer
 	I should find products easily
 

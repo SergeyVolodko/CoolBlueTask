@@ -1,4 +1,3 @@
-
 using Autofac;
 using CoolBlueTask.Products.Models;
 using FluentValidation;
@@ -11,7 +10,6 @@ namespace CoolBlueTask.Products
 		{
 			builder.RegisterType<ProductRepository>()
 				.As<IProductRepository>()
-				.WithParameter("connectionString", @"C:\temp\db.sqlite")
 				.SingleInstance();
 
 			builder.RegisterType<ProductValidator>()

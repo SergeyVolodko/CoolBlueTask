@@ -23,10 +23,6 @@ namespace CoolBlueTask.Products
 		public ProductRepository(IApiConfiguration configuration)
 		{
 			this.connectionString = configuration.DbConnectionString;
-
-			// Mocking with in-memory DB;
-			var adapter = new InMemoryAdapter();
-			Database.UseMockAdapter(adapter);
 		}
 
 		private dynamic OpenDB()
@@ -43,7 +39,7 @@ namespace CoolBlueTask.Products
 
 				return product;
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
 				throw new DataBaseException();
 			}

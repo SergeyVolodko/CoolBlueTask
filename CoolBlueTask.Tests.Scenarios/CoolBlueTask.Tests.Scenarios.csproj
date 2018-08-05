@@ -90,12 +90,28 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Simple.Data, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.Data.Core.0.19.0.0\lib\net40\Simple.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Simple.Data.Ado, Version=0.19.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.Data.Ado.0.19.0.0\lib\net40\Simple.Data.Ado.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Simple.Data.Sqlite, Version=0.18.3.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.Data.Sqlite.0.18.3.2\lib\net40\Simple.Data.Sqlite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SpecFlow.xUnitAdapter.SpecFlowPlugin, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.xUnitAdapter.1.2.1\lib\net45\SpecFlow.xUnitAdapter.SpecFlowPlugin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.108.0\lib\net46\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -166,6 +182,12 @@
     </Compile>
     <Compile Include="Products\ProductBrowsingSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesCombinations\SalesCombinationsFlow.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SalesCombinationsFlow.feature</DependentUpon>
+    </Compile>
+    <Compile Include="SalesCombinations\SalesCombinationsFlowSteps.cs" />
     <Compile Include="SpecFlow.xUnitAdapter.Config.cs" />
     <Compile Include="VersionCheck\VersionCheck.feature.cs">
       <AutoGen>True</AutoGen>
@@ -179,37 +201,46 @@
     <None Include="packages.config" />
     <None Include="Products\ProductAdministration.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>ProductAdministration.feature.cs</LastGenOutput>
     </None>
     <None Include="Products\ProductBrowsing.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ProductBrowsing.feature.cs</LastGenOutput>
     </None>
-    <None Include="test_files\Products\product_all_fields_invalid_request.json">
+    <None Include="SalesCombinations\SalesCombinationsFlow.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>SalesCombinationsFlow.feature.cs</LastGenOutput>
+    </None>
+    <None Include="test_files\products\product_all_fields_invalid_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\product_empty_input_response.json">
+    <None Include="test_files\products\product_empty_input_response.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\product_empty_input_request.json">
+    <None Include="test_files\products\product_empty_input_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\product_all_fields_invalid_response.json">
+    <None Include="test_files\products\product_all_fields_invalid_response.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\update_product_response.json">
+    <None Include="test_files\products\update_product_response.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\update_product_request.json">
+    <None Include="test_files\products\update_product_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\existing_product_request.json">
+    <None Include="test_files\products\existing_product_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\new_product_response.json">
+    <None Include="test_files\products\new_product_response.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="test_files\Products\new_product_request.json">
+    <None Include="test_files\products\new_product_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\sales_combinations\existing_product_request.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\test-db.sqlite">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="VersionCheck\VersionCheck.feature">
@@ -226,7 +257,10 @@
       <Name>CoolBlueTask</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="x64\SQLite.Interop.dll" />
+    <Content Include="x86\SQLite.Interop.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SpecFlow.2.3.2\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.3.2\build\SpecFlow.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -238,9 +272,11 @@
     <Error Condition="!Exists('..\packages\xunit.core.2.3.0\build\xunit.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.core.2.3.0\build\xunit.core.targets'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets'))" />
   </Target>
   <Import Project="..\packages\xunit.core.2.3.0\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.3.0\build\xunit.core.targets')" />
   <Import Project="..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.targets" Condition="Exists('..\packages\SpecFlow.xUnitAdapter.1.2.1\build\net45\SpecFlow.xUnitAdapter.targets')" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.108.0\build\net46\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

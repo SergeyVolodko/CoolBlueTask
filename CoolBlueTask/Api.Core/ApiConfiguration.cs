@@ -1,4 +1,7 @@
+using System;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 
 namespace CoolBlueTask
 {
@@ -24,7 +27,19 @@ namespace CoolBlueTask
 			Auth0Audience = ConfigurationManager.AppSettings["Auth0Audience"];
 			Auth0Secret = ConfigurationManager.AppSettings["Auth0Secret"];
 
-			DbConnectionString = ConfigurationManager.AppSettings["DbConnectionString"];
+			DbConnectionString = Path.Combine(AssemblyDirectory, ConfigurationManager.AppSettings["DbConnectionString"]);
+		}
+
+		private static string AssemblyDirectory
+		{
+			get
+			{
+				var codeBase = Assembly.GetAssembly(typeof(ApiConfiguration)).CodeBase;
+				var uri = new UriBuilder(codeBase);
+				var path = Uri.UnescapeDataString(uri.Path);
+
+				return Path.GetDirectoryName(path);
+			}
 		}
 	}
 }

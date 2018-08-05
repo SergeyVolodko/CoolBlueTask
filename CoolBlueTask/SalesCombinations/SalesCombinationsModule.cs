@@ -9,11 +9,7 @@ namespace CoolBlueTask.SalesCombinations
 
 			builder.RegisterType<SalesCombinationRepository>()
 				.As<ISalesCombinationRepository>()
-				.WithParameter("connectionString", @"C:\temp\db.sqlite")
 				.SingleInstance();
-
-			//builder.RegisterType<ProductValidator>()
-			//	.As<AbstractValidator<Product>>();
 
 			builder.RegisterType<SalesCombinationBuilder>()
 				.As<ISalesCombinationBuilder>();

@@ -3,6 +3,7 @@ using System.Net.Http;
 using System.Text;
 using CoolBlueTask.Tests.Scenarios.Data;
 using Flurl;
+using Newtonsoft.Json;
 
 namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 {
@@ -97,6 +98,25 @@ namespace CoolBlueTask.Tests.Scenarios.Infrastructure
 
 			return new TypedResponse(response);
 		}
+
+		public TypedResponse<TResponse> PostObject<TResponse>(
+			string endpoint,
+			object dto,
+			string token) where TResponse : new()
+		{
+			resetClientHeaders(token);
+
+			var url = $"{baseAddress}{endpoint}";
+
+			var json = JsonConvert.SerializeObject(dto);
+
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+			var response = client.PostAsync(url, content).Result;
+
+			return new TypedResponse<TResponse>(response);
+		}
+
 		public TypedResponse PutJson(
 			string endpoint,
 			string json,

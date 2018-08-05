@@ -24,9 +24,9 @@ namespace CoolBlueTask.Products
 		public HttpResponseMessage CreateProduct(
 			[FromBody]ProductWriteDto product)
 		{
-			var created =  service.CreateProduct(product);
+			var createdProduct =  service.CreateProduct(product);
 
-			return Request.CreateResponse(HttpStatusCode.Created, created);
+			return Request.CreateResponse(HttpStatusCode.Created, createdProduct);
 		}
 
 		[HttpPut]

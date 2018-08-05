@@ -7,6 +7,7 @@ using CoolBlueTask.SalesCombinations;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Jwt;
 using Owin;
+using Simple.Data;
 
 [assembly: OwinStartup(typeof(CoolBlueTask.Startup))]
 namespace CoolBlueTask

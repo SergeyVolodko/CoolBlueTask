@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;
@@ -6,6 +7,7 @@ using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.SalesCombinations.Models;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using Newtonsoft.Json;
 using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
@@ -75,10 +77,16 @@ namespace CoolBlueTask.Tests.SalesCombinations.Controller
 				.Returns(createdSalesCombination);
 
 			// Act
-			var actual = sut.CreateCombination(combination);
+			var response = sut.CreateCombination(combination);
 
 			// Asserts
-			actual.ShouldBeEquivalentTo(createdSalesCombination);
+			response.StatusCode.Should().Be(HttpStatusCode.Created);
+
+			var content = response.Content.ReadAsStringAsync()
+				.GetAwaiter().GetResult();
+
+			JsonConvert.DeserializeObject<SalesCombinationReadDto>(content)
+				.ShouldBeEquivalentTo(createdSalesCombination);
 		}
 	}
 }

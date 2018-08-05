@@ -10,24 +10,24 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace CoolBlueTask.Tests.Scenarios.Products
+namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 {
     using TechTalk.SpecFlow;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class ProductBrowsingFeature : Xunit.IClassFixture<ProductBrowsingFeature.FixtureData>, System.IDisposable
+    public partial class SalesCombinationsFlowFeature : Xunit.IClassFixture<SalesCombinationsFlowFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "ProductBrowsing.feature"
+#line 1 "SalesCombinationsFlow.feature"
 #line hidden
         
-        public ProductBrowsingFeature(ProductBrowsingFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SalesCombinationsFlowFeature(SalesCombinationsFlowFeature.FixtureData fixtureData, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -36,8 +36,8 @@ namespace CoolBlueTask.Tests.Scenarios.Products
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "ProductBrowsing", "\tIn order to buy more goods from web shop\r\n\tAs a consumer\r\n\tI should find product" +
-                    "s easily", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "SalesCombinationsFlow", "\tIn order to sell more goods\r\n\tAs a shop owner\r\n\tJeff should be able to combine r" +
+                    "elated products into propositions for customers", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -72,12 +72,12 @@ namespace CoolBlueTask.Tests.Scenarios.Products
             this.ScenarioTearDown();
         }
         
-        [Xunit.FactAttribute(DisplayName="Search product by name")]
-        [Xunit.TraitAttribute("FeatureTitle", "ProductBrowsing")]
-        [Xunit.TraitAttribute("Description", "Search product by name")]
-        public virtual void SearchProductByName()
+        [Xunit.FactAttribute(DisplayName="Get products sales combinations")]
+        [Xunit.TraitAttribute("FeatureTitle", "SalesCombinationsFlow")]
+        [Xunit.TraitAttribute("Description", "Get products sales combinations")]
+        public virtual void GetProductsSalesCombinations()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Search product by name", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get products sales combinations", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line hidden
@@ -86,22 +86,32 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "Laptop"});
             table1.AddRow(new string[] {
-                        "Tablet"});
+                        "Mouse"});
             table1.AddRow(new string[] {
-                        "Table"});
+                        "Headset"});
+            table1.AddRow(new string[] {
+                        "Keyboard"});
 #line 7
- testRunner.Given("Jeff has following products in his store", ((string)(null)), table1, "Given ");
-#line 12
- testRunner.When("I search for \'Table\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.Given("Jeff has related products in his store", ((string)(null)), table1, "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                        "product"});
+                        "Main product",
+                        "Related product 1",
+                        "Related product 2"});
             table2.AddRow(new string[] {
-                        "Tablet"});
+                        "Laptop",
+                        "Mouse",
+                        "Keyboard"});
             table2.AddRow(new string[] {
-                        "Table"});
+                        "Laptop",
+                        "Headset",
+                        ""});
 #line 13
- testRunner.Then("I see following products", ((string)(null)), table2, "Then ");
+ testRunner.When("He defines combinations of these products", ((string)(null)), table2, "When ");
+#line 17
+ testRunner.And("customer observes \'Laptop\' product", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.Then("customer sees defined by Jeff products suggestions for \'Laptop\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -113,12 +123,12 @@ this.ScenarioSetup(scenarioInfo);
             
             public FixtureData()
             {
-                ProductBrowsingFeature.FeatureSetup();
+                SalesCombinationsFlowFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                ProductBrowsingFeature.FeatureTearDown();
+                SalesCombinationsFlowFeature.FeatureTearDown();
             }
         }
     }

@@ -68,8 +68,7 @@ namespace CoolBlueTask
 						new SymmetricKeyIssuerSecurityTokenProvider(config.Auth0Issuer,
 							Encoding.UTF8.GetBytes(config.Auth0Secret))
 					}
-				}
-				);
+				});
 		}
 	}
 }

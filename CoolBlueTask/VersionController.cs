@@ -1,4 +1,3 @@
-using System;
 using System.Reflection;
 using System.Web.Http;
 using CoolBlueTask.Api.Core;

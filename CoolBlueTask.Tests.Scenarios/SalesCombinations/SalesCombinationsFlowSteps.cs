@@ -136,22 +136,16 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 					expectedValidationJson = "create_invalid_combination_empty_input_response.json";
 					break;
 				}
-				case "Main product missed":
+				case "Main product and related products are missed":
 				{
 					combination.MainProductId = null;
-					expectedValidationJson = "create_invalid_combination_no_main_response.json";
+					expectedValidationJson = "create_invalid_combination_corrupted_input_response.json";
 					break;
 				}
 				case "Not existing main product":
 				{
 					combination.MainProductId = "non-existing";
 					expectedValidationJson = "create_invalid_combination_not_existing_main_response.json";
-					break;
-				}
-				case "Related products missed":
-				{
-					combination.MainProductId = products["Pen"];
-					expectedValidationJson = "create_invalid_combination_no_related_response.json";
 					break;
 				}
 				case "One of the related products does not exist":

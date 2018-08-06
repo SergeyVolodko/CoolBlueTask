@@ -243,6 +243,7 @@
     <Compile Include="SalesCombinations\SalesCombinationController.cs" />
     <Compile Include="SalesCombinations\SalesCombinationService.cs" />
     <Compile Include="SalesCombinations\SalesCombinationsModule.cs" />
+    <Compile Include="SalesCombinations\Validators\SalesCombinationWriteDtoValidator.cs" />
     <Compile Include="VersionController.cs" />
     <Compile Include="Products\Models\ProductWriteDto.cs" />
     <Compile Include="Products\Models\Product.cs" />

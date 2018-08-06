@@ -120,9 +120,8 @@ this.ScenarioSetup(scenarioInfo);
         [Xunit.TraitAttribute("FeatureTitle", "SalesCombinationsFlow")]
         [Xunit.TraitAttribute("Description", "Create invalid Sales Combination")]
         [Xunit.InlineDataAttribute("Empty input", new string[0])]
-        [Xunit.InlineDataAttribute("Main product missed", new string[0])]
+        [Xunit.InlineDataAttribute("Main product and related products are missed", new string[0])]
         [Xunit.InlineDataAttribute("Not existing main product", new string[0])]
-        [Xunit.InlineDataAttribute("Related products missed", new string[0])]
         [Xunit.InlineDataAttribute("One of the related products does not exist", new string[0])]
         public virtual void CreateInvalidSalesCombination(string wrongCombinationInput, string[] exampleTags)
         {

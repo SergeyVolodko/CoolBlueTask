@@ -23,9 +23,8 @@ Scenario Outline: Create invalid Sales Combination
 	Then Jeff should see corresponding errors
 
 Examples: Validation violation cases
-	| Wrong combination input                    |
-	| Empty input                                |
-	| Main product missed                        |
-	| Not existing main product                  |
-	| Related products missed                    |
-	| One of the related products does not exist |
+	| Wrong combination input                      |
+	| Empty input                                  |
+	| Main product and related products are missed |
+	| Not existing main product                    |
+	| One of the related products does not exist   |

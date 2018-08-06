@@ -39,7 +39,7 @@ namespace CoolBlueTask.Products
 
 				return product;
 			}
-			catch (Exception e)
+			catch (Exception)
 			{
 				throw new DataBaseException();
 			}

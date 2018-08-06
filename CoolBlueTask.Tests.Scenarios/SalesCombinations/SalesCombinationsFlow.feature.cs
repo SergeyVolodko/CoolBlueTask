@@ -116,6 +116,29 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.TheoryAttribute(DisplayName="Create invalid Sales Combination")]
+        [Xunit.TraitAttribute("FeatureTitle", "SalesCombinationsFlow")]
+        [Xunit.TraitAttribute("Description", "Create invalid Sales Combination")]
+        [Xunit.InlineDataAttribute("Empty input", new string[0])]
+        [Xunit.InlineDataAttribute("Main product missed", new string[0])]
+        [Xunit.InlineDataAttribute("Not existing main product", new string[0])]
+        [Xunit.InlineDataAttribute("Related products missed", new string[0])]
+        [Xunit.InlineDataAttribute("One of the related products does not exist", new string[0])]
+        public virtual void CreateInvalidSalesCombination(string wrongCombinationInput, string[] exampleTags)
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create invalid Sales Combination", exampleTags);
+#line 20
+this.ScenarioSetup(scenarioInfo);
+#line 21
+ testRunner.Given("Jeff has \'Pen\' and \'Paper\' products in his store", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 22
+ testRunner.When(string.Format("he tries to create a sale combination by entering {0}", wrongCombinationInput), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 23
+ testRunner.Then("Jeff should see corresponding errors", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "2.3.2.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

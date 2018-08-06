@@ -50,8 +50,8 @@ namespace CoolBlueTask.SalesCombinations
 			SalesCombinationWriteDto combination)
 		{
 			var newCombination = combinationBuilder
-				.WithMainProduct(combination.MainProductId)
-				.WithRelatedProducts(combination.RelatedProducts)
+				.WithMainProduct(combination?.MainProductId)
+				.WithRelatedProducts(combination?.RelatedProducts)
 				.Build();
 
 			var createdCombination = combinationRepository

@@ -16,3 +16,16 @@ Scenario: Get products sales combinations
 	| Laptop       | Headset           |                   |
 	And customer observes 'Laptop' product
 	Then customer sees defined by Jeff products suggestions for 'Laptop'
+
+Scenario Outline: Create invalid Sales Combination
+	Given Jeff has 'Pen' and 'Paper' products in his store
+	When he tries to create a sale combination by entering <Wrong combination input>
+	Then Jeff should see corresponding errors
+
+Examples: Validation violation cases
+	| Wrong combination input                    |
+	| Empty input                                |
+	| Main product missed                        |
+	| Not existing main product                  |
+	| Related products missed                    |
+	| One of the related products does not exist |

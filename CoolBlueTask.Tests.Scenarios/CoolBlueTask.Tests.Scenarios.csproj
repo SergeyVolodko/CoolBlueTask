@@ -237,6 +237,21 @@
     <None Include="test_files\products\new_product_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="test_files\sales_combinations\create_invalid_combination_no_main_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\sales_combinations\create_invalid_combination_empty_input_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\sales_combinations\create_invalid_combination_not_existing_main_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\sales_combinations\create_invalid_combination_no_related_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test_files\sales_combinations\create_invalid_combination_not_existing_related_response.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="test_files\sales_combinations\existing_product_request.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Runtime.CompilerServices;
+using ApprovalTests;
+using ApprovalTests.Reporters;
 using CoolBlueTask.SalesCombinations.Models;
 using CoolBlueTask.Tests.Scenarios.Data;
 using CoolBlueTask.Tests.Scenarios.Infrastructure;
@@ -19,6 +22,8 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 		private readonly Dictionary<string, string> products = new Dictionary<string, string>();
 		private readonly List<SalesCombinationReadDto> expectedCombinations = new List<SalesCombinationReadDto>();
 		private TypedResponse<List<SalesCombinationReadDto>> salesCombinationsResponse;
+		private TypedResponse<SalesCombinationReadDto> validationResponse;
+		private string expectedValidationJson;
 
 		[Given(@"Jeff has related products in his store")]
 		public void GivenJeffHasRelatedProductsInHisStore(
@@ -30,15 +35,22 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 				var json = File.ReadAllText(jsonPath);
 
 				var productName = row["product"];
-				var toCreateJson = json.Replace("product-name", productName);
-				var createdResponse = Locator.HttpHelper.PostJson(productsUrl, toCreateJson, adminToken);
 
-				createdResponse.StatusCode
-					.Should().Be(HttpStatusCode.Created);
-				var productId = ScenariosHelper.GetIdFromResponse(createdResponse);
+				var productId = createProduct(json, productName);
 
 				products[productName] = productId;
 			}
+		}
+
+		private string createProduct(string json, string productName)
+		{
+			var toCreateJson = json.Replace("product-name", productName);
+			var createdResponse = Locator.HttpHelper.PostJson(productsUrl, toCreateJson, adminToken);
+
+			createdResponse.StatusCode
+				.Should().Be(HttpStatusCode.Created);
+			var productId = ScenariosHelper.GetIdFromResponse(createdResponse);
+			return productId;
 		}
 
 		[When(@"He defines combinations of these products")]
@@ -94,5 +106,85 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 
 			actual.Should().BeEquivalentTo(expectedCombinations);
 		}
+
+		/// <summary>
+		/// Validations
+		/// </summary>
+		[Given(@"Jeff has '(.*)' and '(.*)' products in his store")]
+		public void GivenJeffHasRelatedProductsInHisStore(
+			string productName1,
+			string productName2)
+		{
+			var jsonPath = Path.Combine(Consts.SalesCombinationsJsonSamplesFolder, "existing_product_request.json");
+			var json = File.ReadAllText(jsonPath);
+
+			products[productName1] = createProduct(json, productName1);
+			products[productName2] = createProduct(json, productName2);
+		}
+
+		[When(@"he tries to create a sale combination by entering (.*)")]
+		public void WhenHeTriesToCreateASaleCombinationByEntering(
+			string invalidInput)
+		{
+			var combination = new SalesCombinationWriteDto { RelatedProducts = new List<string>() };
+
+			switch (invalidInput)
+			{
+				case "Empty input":
+				{
+					combination = null;
+					expectedValidationJson = "create_invalid_combination_empty_input_response.json";
+					break;
+				}
+				case "Main product missed":
+				{
+					combination.MainProductId = null;
+					expectedValidationJson = "create_invalid_combination_no_main_response.json";
+					break;
+				}
+				case "Not existing main product":
+				{
+					combination.MainProductId = "non-existing";
+					expectedValidationJson = "create_invalid_combination_not_existing_main_response.json";
+					break;
+				}
+				case "Related products missed":
+				{
+					combination.MainProductId = products["Pen"];
+					expectedValidationJson = "create_invalid_combination_no_related_response.json";
+					break;
+				}
+				case "One of the related products does not exist":
+				{
+					combination.MainProductId = products["Pen"];
+					combination.RelatedProducts.Add(products["Paper"]);
+					combination.RelatedProducts.Add("non-existing");
+					expectedValidationJson = "create_invalid_combination_not_existing_related_response.json";
+					break;
+				}
+			}
+
+			validationResponse = Locator.HttpHelper
+				.PostObject<SalesCombinationReadDto>(salesCombinationsUrl, combination, adminToken);
+		}
+
+
+		[MethodImpl(MethodImplOptions.NoInlining)]
+		[UseReporter(typeof(DiffReporter))]
+		[Then(@"Jeff should see corresponding errors")]
+		public void ThenJeffShouldSeeCorrespondingErrors()
+		{
+			validationResponse.StatusCode
+				.Should().Be(HttpStatusCode.BadRequest);
+
+			var jsonPath = Path.Combine(Consts.SalesCombinationsJsonSamplesFolder, expectedValidationJson);
+			var expected = File.ReadAllText(jsonPath);
+
+			var actual = validationResponse.ContentAsFormattedJson;
+
+			var writer = new TwoJsonsApprovalFileWriter(expected, actual, nameOfExpected: expectedValidationJson);
+			Approvals.Verify(writer);
+		}
+
 	}
 }

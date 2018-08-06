@@ -32,10 +32,9 @@ namespace CoolBlueTask.SalesCombinations
 		public ISalesCombinationBuilder WithMainProduct(
 			string mainProductId)
 		{
-			if (string.IsNullOrWhiteSpace(mainProductId) ||
-				!productRepository.Exists(mainProductId))
+			if (!productRepository.Exists(mainProductId))
 			{
-				throw new ValidationException("Main product is missing.");
+				throw new ValidationException("Main product does not exist.");
 			}
 
 			var product = productRepository.LoadById(mainProductId);
@@ -48,14 +47,6 @@ namespace CoolBlueTask.SalesCombinations
 		public ISalesCombinationBuilder WithRelatedProducts(
 			IList<string> relatedProductsIds)
 		{
-			if (relatedProductsIds.Count == 0)
-			{
-				throw new ValidationException("Related products can't be empty.");
-			}
-			if (relatedProductsIds.Any(string.IsNullOrWhiteSpace))
-			{
-				throw new ValidationException("A related product id is missing.");
-			}
 			if (relatedProductsIds.Any(i => !productRepository.Exists(i)))
 			{
 				throw new ValidationException("A related product does not exist");

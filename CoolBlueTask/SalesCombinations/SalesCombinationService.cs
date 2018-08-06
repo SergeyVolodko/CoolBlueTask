@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using AutoMapper;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations.Models;
+using FluentValidation;
 
 namespace CoolBlueTask.SalesCombinations
 {
@@ -14,17 +15,20 @@ namespace CoolBlueTask.SalesCombinations
 
 	public class SalesCombinationService : ISalesCombinationService
 	{
+		private readonly AbstractValidator<SalesCombinationWriteDto> inputValidator;
 		private readonly ISalesCombinationRepository combinationRepository;
 		private readonly IProductRepository productRepository;
 		private readonly ISalesCombinationBuilder combinationBuilder;
 		private readonly IMapper mapper;
 
 		public SalesCombinationService(
+			AbstractValidator<SalesCombinationWriteDto> inputValidator,
 			ISalesCombinationRepository combinationRepository,
 			IProductRepository productRepository,
 			ISalesCombinationBuilder combinationBuilder,
 			IMapper mapper)
 		{
+			this.inputValidator = inputValidator;
 			this.combinationRepository = combinationRepository;
 			this.productRepository = productRepository;
 			this.combinationBuilder = combinationBuilder;
@@ -49,9 +53,15 @@ namespace CoolBlueTask.SalesCombinations
 		public SalesCombinationReadDto CreateSalesCombination(
 			SalesCombinationWriteDto combination)
 		{
+			var inputValidationResult = inputValidator.Validate(combination);
+			if (!inputValidationResult.IsValid)
+			{
+				throw new ValidationException(inputValidationResult.Errors);
+			}
+
 			var newCombination = combinationBuilder
-				.WithMainProduct(combination?.MainProductId)
-				.WithRelatedProducts(combination?.RelatedProducts)
+				.WithMainProduct(combination.MainProductId)
+				.WithRelatedProducts(combination.RelatedProducts)
 				.Build();
 
 			var createdCombination = combinationRepository

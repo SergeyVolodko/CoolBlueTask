@@ -21,7 +21,7 @@ namespace CoolBlueTask.Products
 			{
 				return new ValidationResult(new List<ValidationFailure>
 				{
-					new ValidationFailure("Product", "Object can't be null.")
+					new ValidationFailure("Product", "Object can't be null.") { ErrorCode = "not_null" }
 				});
 			}
 

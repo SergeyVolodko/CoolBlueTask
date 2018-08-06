@@ -15,37 +15,6 @@ namespace CoolBlueTask.Tests.SalesCombinations.Builder
 	{
 		[Theory]
 		[AutoNSubstituteData]
-		public void if_any_related_products_empty_throws(
-			SalesCombinationBuilder sut)
-		{
-			// Arrange
-			var relatedProductsIds = new List<string>();
-
-			// Act
-			// Assert
-			sut.Invoking(s => s.WithRelatedProducts(relatedProductsIds))
-				.ShouldThrow<ValidationException>()
-				.WithMessage("Related products can't be empty.");
-		}
-
-		[Theory]
-		[AutoNSubstituteData]
-		public void if_any_related_product_id_is_empty_throws(
-			SalesCombinationBuilder sut,
-			IList<string> relatedProductsIds)
-		{
-			// Arrange
-			relatedProductsIds[1] = "";
-
-			// Act
-			// Assert
-			sut.Invoking(s => s.WithRelatedProducts(relatedProductsIds))
-				.ShouldThrow<ValidationException>()
-				.WithMessage("A related product id is missing.");
-		}
-
-		[Theory]
-		[AutoNSubstituteData]
 		public void calls_product_repo_exists_every_related_product_id(
 			[Frozen] IProductRepository productRepo,
 			SalesCombinationBuilder sut,

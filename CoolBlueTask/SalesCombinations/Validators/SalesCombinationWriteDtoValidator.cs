@@ -13,7 +13,8 @@ namespace CoolBlueTask.SalesCombinations.Validators
 			RuleFor(s => s.MainProductId)
 				.Must(id => !string.IsNullOrWhiteSpace(id))
 				.OverridePropertyName("MainProduct")
-				.WithErrorCode("notempty_error");
+				.WithErrorCode("notempty_error")
+				.WithMessage("Main product is missing.");
 
 			RuleFor(s => s.RelatedProducts)
 				.NotNull()
@@ -27,7 +28,7 @@ namespace CoolBlueTask.SalesCombinations.Validators
 			{
 				return new ValidationResult(new List<ValidationFailure>
 				{
-					new ValidationFailure("Sales Combination", "Object can't be null.")
+					new ValidationFailure("Sales Combination", "Object can't be null.") { ErrorCode = "not_null"}
 				});
 			}
 

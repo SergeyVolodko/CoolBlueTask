@@ -145,6 +145,7 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 				case "Not existing main product":
 				{
 					combination.MainProductId = "non-existing";
+					combination.RelatedProducts.Add(products["Paper"]);
 					expectedValidationJson = "create_invalid_combination_not_existing_main_response.json";
 					break;
 				}

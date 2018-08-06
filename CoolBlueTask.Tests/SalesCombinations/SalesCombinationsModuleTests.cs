@@ -1,8 +1,11 @@
 using Autofac;
 using CoolBlueTask.Products;
 using CoolBlueTask.SalesCombinations;
+using CoolBlueTask.SalesCombinations.Models;
+using CoolBlueTask.SalesCombinations.Validators;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using FluentValidation;
 using Xunit;
 
 namespace CoolBlueTask.Tests.SalesCombinations
@@ -50,6 +53,16 @@ namespace CoolBlueTask.Tests.SalesCombinations
 
 			// Assert
 			builder.Should().BeOfType<SalesCombinationBuilder>();
+		}
+
+		[Fact]
+		public void validators_are_registered()
+		{
+			// Act
+			var inputValidator = container.Resolve<AbstractValidator<SalesCombinationWriteDto>>();
+
+			// Assert
+			inputValidator.Should().BeOfType<SalesCombinationWriteDtoValidator>();
 		}
 
 		[Fact]

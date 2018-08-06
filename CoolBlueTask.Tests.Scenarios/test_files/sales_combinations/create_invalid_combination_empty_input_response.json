@@ -1,7 +1,7 @@
 [
   {
-    "property_name": null,
-    "error_code": null,
-    "error_message": "Main product is missing."
+    "property_name": "Sales Combination",
+    "error_code": "not_null",
+    "error_message": "Object can't be null."
   }
 ]

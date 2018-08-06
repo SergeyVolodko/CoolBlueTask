@@ -1,7 +1,12 @@
 [
   {
-    "property_name": null,
-    "error_code": null,
+    "property_name": "MainProduct",
+    "error_code": "notempty_error",
     "error_message": "Main product is missing."
+  },
+  {
+    "property_name": "RelatedProducts",
+    "error_code": "notempty_error",
+    "error_message": "'Related Products' should not be empty."
   }
 ]

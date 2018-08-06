@@ -4,6 +4,8 @@ using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.SalesCombinations.Models;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
+using FluentValidation;
+using FluentValidation.Results;
 using NSubstitute;
 using NSubstitute.Experimental;
 using Ploeh.AutoFixture.Xunit2;
@@ -15,12 +17,52 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 	{
 		[Theory]
 		[AutoNSubstituteData]
-		public void calls_builder_build_new_combination(
+		public void calls_input_validator_validate_input(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
 			[Frozen] ISalesCombinationBuilder builder,
 			SalesCombinationService sut,
 			SalesCombinationWriteDto combinationDto)
 		{
 			// Arrange
+			MockBuilder(builder);
+			inputValidator.Validate(combinationDto).Returns(new ValidationResult());
+
+			// Act
+			sut.CreateSalesCombination(combinationDto);
+
+			// Assert
+			inputValidator.Received(1).Validate(combinationDto);
+		}
+		[Theory]
+		[AutoNSubstituteData]
+		public void if_input_is_invalid_throws(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
+			SalesCombinationService sut,
+			SalesCombinationWriteDto combinationDto,
+			List<ValidationFailure> errors)
+		{
+			// Arrange
+			inputValidator.Validate(combinationDto)
+				.Returns(new ValidationResult(errors));
+
+			// Act // Assert
+			sut.Invoking(s => s.CreateSalesCombination(combinationDto))
+				.ShouldThrow<ValidationException>()
+				.Which.Errors
+				.ShouldAllBeEquivalentTo(errors);
+		}
+
+
+		[Theory]
+		[AutoNSubstituteData]
+		public void calls_builder_build_new_combination(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
+			[Frozen] ISalesCombinationBuilder builder,
+			SalesCombinationService sut,
+			SalesCombinationWriteDto combinationDto)
+		{
+			// Arrange
+			inputValidator.Validate(combinationDto).Returns(new ValidationResult());
 			MockBuilder(builder);
 
 			// Act
@@ -38,6 +80,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 		[Theory]
 		[AutoNSubstituteData]
 		public void calls_combination_repo_save_built_combination(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
 			[Frozen] ISalesCombinationRepository repo,
 			[Frozen] ISalesCombinationBuilder builder,
 			SalesCombinationService sut,
@@ -45,6 +88,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 			SalesCombination newCombination)
 		{
 			// Arrange
+			inputValidator.Validate(combinationDto).Returns(new ValidationResult());
 			MockBuilder(builder);
 			builder.Build().Returns(newCombination);
 
@@ -58,6 +102,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 		[Theory]
 		[AutoNSubstituteData]
 		public void calls_mapper_map_created_combination_to_readdto(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
 			[Frozen] ISalesCombinationRepository repo,
 			[Frozen] ISalesCombinationBuilder builder,
 			[Frozen] IMapper mapper,
@@ -67,6 +112,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 			SalesCombination createdCombination)
 		{
 			// Arrange
+			inputValidator.Validate(combinationDto).Returns(new ValidationResult());
 			MockBuilder(builder);
 			builder.Build().Returns(newCombination);
 			repo.Save(newCombination).Returns(createdCombination);
@@ -82,6 +128,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 		[Theory]
 		[AutoNSubstituteData]
 		public void happy_path(
+			[Frozen] AbstractValidator<SalesCombinationWriteDto> inputValidator,
 			[Frozen] ISalesCombinationRepository repo,
 			[Frozen] ISalesCombinationBuilder builder,
 			[Frozen] IMapper mapper,
@@ -92,6 +139,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Service
 			SalesCombinationReadDto expected)
 		{
 			// Arrange
+			inputValidator.Validate(combinationDto).Returns(new ValidationResult());
 			MockBuilder(builder);
 			builder.Build().Returns(newCombination);
 			repo.Save(newCombination).Returns(createdCombination);

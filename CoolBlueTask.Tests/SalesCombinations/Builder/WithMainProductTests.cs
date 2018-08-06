@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using FluentValidation;
+using FluentValidation.Results;
 using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
@@ -46,10 +48,20 @@ namespace CoolBlueTask.Tests.SalesCombinations.Builder
 			SalesCombinationBuilder sut,
 			string mainProductId)
 		{
+			// Arrange
+			var failures = new List<ValidationFailure>
+			{
+				new ValidationFailure("MainProduct", "Main product does not exist.")
+				{
+					ErrorCode = "not_existing_main_product"
+				}
+			};
 			// Act
 			// Assert
 			sut.Invoking(s => s.WithMainProduct(mainProductId))
-				.ShouldThrow<ValidationException>();
+				.ShouldThrow<ValidationException>()
+				.And
+				.Errors.ShouldBeEquivalentTo(failures);
 		}
 
 		[Theory]

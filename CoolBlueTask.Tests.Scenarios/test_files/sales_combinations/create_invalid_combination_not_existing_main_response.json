@@ -1,7 +1,7 @@
 [
   {
-    "property_name": null,
-    "error_code": null,
+    "property_name": "MainProduct",
+    "error_code": "not_existing_main_product",
     "error_message": "Main product does not exist."
   }
 ]

@@ -5,6 +5,7 @@ using CoolBlueTask.SalesCombinations;
 using CoolBlueTask.Tests.Infrastructure;
 using FluentAssertions;
 using FluentValidation;
+using FluentValidation.Results;
 using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using Xunit;
@@ -33,7 +34,7 @@ namespace CoolBlueTask.Tests.SalesCombinations.Builder
 
 		[Theory]
 		[AutoNSubstituteData]
-		public void if_pany_related_product_not_exist_throws(
+		public void if_any_related_product_not_exist_throws(
 			[Frozen] IProductRepository productRepo,
 			SalesCombinationBuilder sut,
 			IList<string> relatedProductsIds)
@@ -43,11 +44,20 @@ namespace CoolBlueTask.Tests.SalesCombinations.Builder
 			productRepo.Exists(relatedProductsIds[1]).Returns(false);
 			productRepo.Exists(relatedProductsIds[2]).Returns(true);
 
+			var failures = new List<ValidationFailure>
+			{
+				new ValidationFailure("RelatedProducts", "A related product does not exist.")
+				{
+					ErrorCode = "not_existing_related_product"
+				}
+			};
+
 			// Act
 			// Assert
 			sut.Invoking(s => s.WithRelatedProducts(relatedProductsIds))
 				.ShouldThrow<ValidationException>()
-				.WithMessage("A related product does not exist");
+				.And
+				.Errors.ShouldBeEquivalentTo(failures);
 		}
 
 		[Theory]

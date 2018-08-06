@@ -1,7 +1,7 @@
 [
   {
-    "property_name": null,
-    "error_code": null,
-    "error_message": "A related product does not exist"
+    "property_name": "RelatedProducts",
+    "error_code": "not_existing_related_product",
+    "error_message": "A related product does not exist."
   }
 ]

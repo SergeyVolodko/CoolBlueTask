@@ -60,9 +60,11 @@ namespace CoolBlueTask.Tests.SalesCombinations
 		{
 			// Act
 			var inputValidator = container.Resolve<AbstractValidator<SalesCombinationWriteDto>>();
+			var combinationValidator = container.Resolve<AbstractValidator<SalesCombination>>();
 
 			// Assert
 			inputValidator.Should().BeOfType<SalesCombinationWriteDtoValidator>();
+			combinationValidator.Should().BeOfType<SalesCombinationValidator>();
 		}
 
 		[Fact]

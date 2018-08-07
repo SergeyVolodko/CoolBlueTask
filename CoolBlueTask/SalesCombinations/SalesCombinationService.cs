@@ -19,6 +19,7 @@ namespace CoolBlueTask.SalesCombinations
 		private readonly ISalesCombinationRepository combinationRepository;
 		private readonly IProductRepository productRepository;
 		private readonly ISalesCombinationBuilder combinationBuilder;
+		private readonly AbstractValidator<SalesCombination> combinationValidator;
 		private readonly IMapper mapper;
 
 		public SalesCombinationService(
@@ -26,12 +27,14 @@ namespace CoolBlueTask.SalesCombinations
 			ISalesCombinationRepository combinationRepository,
 			IProductRepository productRepository,
 			ISalesCombinationBuilder combinationBuilder,
+			AbstractValidator<SalesCombination> combinationValidator,
 			IMapper mapper)
 		{
 			this.inputValidator = inputValidator;
 			this.combinationRepository = combinationRepository;
 			this.productRepository = productRepository;
 			this.combinationBuilder = combinationBuilder;
+			this.combinationValidator = combinationValidator;
 			this.mapper = mapper;
 		}
 
@@ -63,6 +66,12 @@ namespace CoolBlueTask.SalesCombinations
 				.WithMainProduct(combination.MainProductId)
 				.WithRelatedProducts(combination.RelatedProducts)
 				.Build();
+
+			var validationResult = combinationValidator.Validate(newCombination);
+			if (!validationResult.IsValid)
+			{
+				throw new ValidationException(validationResult.Errors);
+			}
 
 			var createdCombination = combinationRepository
 				.Save(newCombination);

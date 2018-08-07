@@ -271,6 +271,7 @@
     <Compile Include="SalesCombinations\SalesCombinationsModuleTests.cs" />
     <Compile Include="SalesCombinations\Service\CreateSalesCombinationTests.cs" />
     <Compile Include="SalesCombinations\Service\GetCombinationsForProductTests.cs" />
+    <Compile Include="SalesCombinations\Validators\SalesCombinationValidatorTests.cs" />
     <Compile Include="SalesCombinations\Validators\InputValidatorTests.cs" />
     <Compile Include="StartupIntegrationTests.cs" />
   </ItemGroup>

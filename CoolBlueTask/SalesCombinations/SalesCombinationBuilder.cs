@@ -1,10 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
 using CoolBlueTask.Products;
 using CoolBlueTask.Products.Models;
 using CoolBlueTask.SalesCombinations.Models;
-using FluentValidation;
-using FluentValidation.Results;
 
 namespace CoolBlueTask.SalesCombinations
 {
@@ -33,12 +30,6 @@ namespace CoolBlueTask.SalesCombinations
 		public ISalesCombinationBuilder WithMainProduct(
 			string mainProductId)
 		{
-			if (!productRepository.Exists(mainProductId))
-			{
-				var failure = new ValidationFailure("MainProduct", "Main product does not exist.") {ErrorCode = "not_existing_main_product"};
-				throw new ValidationException(new List<ValidationFailure> { failure });
-			}
-
 			var product = productRepository.LoadById(mainProductId);
 
 			combination.MainProduct = product;
@@ -49,12 +40,6 @@ namespace CoolBlueTask.SalesCombinations
 		public ISalesCombinationBuilder WithRelatedProducts(
 			IList<string> relatedProductsIds)
 		{
-			if (relatedProductsIds.Any(i => !productRepository.Exists(i)))
-			{
-				var failure = new ValidationFailure("RelatedProducts", "A related product does not exist.") { ErrorCode = "not_existing_related_product" };
-				throw new ValidationException(new List<ValidationFailure> { failure });
-			}
-
 			foreach (var productsId in relatedProductsIds)
 			{
 				var product = productRepository.LoadById(productsId);

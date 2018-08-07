@@ -89,6 +89,20 @@ namespace CoolBlueTask.Tests.Products
 
 		[Theory]
 		[AutoNSubstituteData]
+		public void load_by_not_existing_id_returns_null(
+			string id)
+		{
+			// Arrange
+
+			// Act
+			var actual = sut.LoadById(id);
+
+			// Assert
+			actual.Should().BeNull();
+		}
+
+		[Theory]
+		[AutoNSubstituteData]
 		public void save_exist_integration(
 			Product newProduct)
 		{

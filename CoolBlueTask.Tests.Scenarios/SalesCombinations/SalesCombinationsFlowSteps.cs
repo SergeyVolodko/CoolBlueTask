@@ -175,7 +175,6 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 				.PostObject<SalesCombinationReadDto>(salesCombinationsUrl, combination, adminToken);
 		}
 
-
 		[MethodImpl(MethodImplOptions.NoInlining)]
 		[UseReporter(typeof(DiffReporter))]
 		[Then(@"Jeff should see corresponding errors")]
@@ -192,6 +191,5 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 			var writer = new TwoJsonsApprovalFileWriter(expected, actual, nameOfExpected: expectedValidationJson);
 			Approvals.Verify(writer);
 		}
-
 	}
 }

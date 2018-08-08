@@ -41,7 +41,6 @@ namespace CoolBlueTask.SalesCombinations.Validators
 					new ValidationFailure("Sales Combination", "Object can't be null.") { ErrorCode = "not_null"}
 				});
 			}
-
 			return base.Validate(instance);
 		}
 	}

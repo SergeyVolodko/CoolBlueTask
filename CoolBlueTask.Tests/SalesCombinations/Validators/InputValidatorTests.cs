@@ -33,7 +33,8 @@ namespace CoolBlueTask.Tests.SalesCombinations.Validators
 			string mainProductId,
 			List<string> relatedProducts,
 			string expectedPropertyName,
-			string expectedErrorCode)
+			string expectedErrorCode,
+			string expectedMessage)
 		{
 			// Arrange
 			var input = new SalesCombinationWriteDto
@@ -46,8 +47,10 @@ namespace CoolBlueTask.Tests.SalesCombinations.Validators
 			var actual = sut.Validate(input).Errors;
 
 			// Assert
-			actual.Should().Contain(e => e.PropertyName == expectedPropertyName &&
-										 e.ErrorCode == expectedErrorCode);
+			actual.Should().Contain(e => 
+				e.PropertyName == expectedPropertyName &&
+				e.ErrorCode == expectedErrorCode &&
+				e.ErrorMessage == expectedMessage);
 		}
 
 		public static IEnumerable<object[]> FailingInputValidationCases()
@@ -55,25 +58,38 @@ namespace CoolBlueTask.Tests.SalesCombinations.Validators
 			var fixture = new Fixture();
 			var someMainProduct = fixture.Create<string>();
 			var someRelatedProducts = fixture.Create<List<string>>();
+
+			var maxRelatedProducts = 5;
+			fixture.RepeatCount = maxRelatedProducts + 1;
+			var tooManyRelatedProducts = fixture.Create<List<string>>();
+
 			yield return new object[]
 			{
-				null, someRelatedProducts, "MainProduct", "notempty_error"
+				null, someRelatedProducts, "MainProduct", "notempty_error", "Main product is missing."
 			};
 			yield return new object[]
 			{
-				"", someRelatedProducts, "MainProduct", "notempty_error"
+				"", someRelatedProducts, "MainProduct", "notempty_error", "Main product is missing."
 			};
 			yield return new object[]
 			{
-				" ", someRelatedProducts, "MainProduct", "notempty_error"
+				" ", someRelatedProducts, "MainProduct", "notempty_error", "Main product is missing."
 			};
 			yield return new object[]
 			{
-				someMainProduct, null , "RelatedProducts", "notnull_error"
+				someMainProduct, null, "RelatedProducts", "notempty_error", "Related products are missing."
 			};
 			yield return new object[]
 			{
-				someMainProduct, new List<string>() , "RelatedProducts", "notempty_error"
+				someMainProduct, null, "RelatedProducts", "notempty_error", "Related products are missing."
+			};
+			yield return new object[]
+			{
+				someMainProduct, new List<string>(), "RelatedProducts", "notempty_error", "Related products are missing."
+			};
+			yield return new object[]
+			{
+				someMainProduct, tooManyRelatedProducts, "RelatedProducts", "too_many_related_products", "The number of related products should be less than 5."
 			};
 		}
 

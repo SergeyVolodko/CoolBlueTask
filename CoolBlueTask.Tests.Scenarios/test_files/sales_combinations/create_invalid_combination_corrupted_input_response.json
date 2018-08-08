@@ -7,6 +7,6 @@
   {
     "property_name": "RelatedProducts",
     "error_code": "notempty_error",
-    "error_message": "'Related Products' should not be empty."
+    "error_message": "Related products are missing."
   }
 ]

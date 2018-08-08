@@ -123,6 +123,7 @@ this.ScenarioSetup(scenarioInfo);
         [Xunit.InlineDataAttribute("Main product and related products are missed", new string[0])]
         [Xunit.InlineDataAttribute("Not existing main product", new string[0])]
         [Xunit.InlineDataAttribute("One of the related products does not exist", new string[0])]
+        [Xunit.InlineDataAttribute("Too many related products", new string[0])]
         public virtual void CreateInvalidSalesCombination(string wrongCombinationInput, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create invalid Sales Combination", exampleTags);

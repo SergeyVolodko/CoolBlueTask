@@ -10,15 +10,25 @@ namespace CoolBlueTask.SalesCombinations.Validators
 	{
 		public SalesCombinationWriteDtoValidator()
 		{
-			RuleFor(s => s.MainProductId)
+			RuleFor(c => c.MainProductId)
 				.Must(id => !string.IsNullOrWhiteSpace(id))
 				.OverridePropertyName("MainProduct")
 				.WithErrorCode("notempty_error")
 				.WithMessage("Main product is missing.");
 
-			RuleFor(s => s.RelatedProducts)
-				.NotNull()
-				.NotEmpty();
+			RuleFor(c => c.RelatedProducts)
+				.Must(relatedProducts =>
+							relatedProducts != null && 
+							relatedProducts.Count > 0)
+				.WithErrorCode("notempty_error")
+				.WithMessage("Related products are missing.");
+
+			var maxRelatedProducts = 5;
+			RuleFor(c => c.RelatedProducts)
+				.Must(relatedProducts => 
+							(relatedProducts?.Count ?? 0) <= maxRelatedProducts)
+				.WithErrorCode("too_many_related_products")
+				.WithMessage("The number of related products should be less than 5.");
 		}
 
 		public override ValidationResult Validate(

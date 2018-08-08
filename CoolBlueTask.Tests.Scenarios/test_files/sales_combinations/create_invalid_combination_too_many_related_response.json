@@ -1,0 +1,7 @@
+[
+  {
+    "property_name": "RelatedProducts",
+    "error_code": "too_many_related_products",
+    "error_message": "The number of related products should be less than 5."
+  }
+]

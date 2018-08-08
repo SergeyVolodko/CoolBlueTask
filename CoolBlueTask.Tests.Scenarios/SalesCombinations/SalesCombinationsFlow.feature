@@ -28,3 +28,4 @@ Examples: Validation violation cases
 	| Main product and related products are missed |
 	| Not existing main product                    |
 	| One of the related products does not exist   |
+	| Too many related products                    |

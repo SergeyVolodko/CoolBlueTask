@@ -8,6 +8,7 @@ using CoolBlueTask.SalesCombinations.Models;
 using CoolBlueTask.Tests.Scenarios.Data;
 using CoolBlueTask.Tests.Scenarios.Infrastructure;
 using FluentAssertions;
+using Ploeh.AutoFixture;
 using TechTalk.SpecFlow;
 
 namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
@@ -155,6 +156,17 @@ namespace CoolBlueTask.Tests.Scenarios.SalesCombinations
 					combination.RelatedProducts.Add(products["Paper"]);
 					combination.RelatedProducts.Add("non-existing");
 					expectedValidationJson = "create_invalid_combination_not_existing_related_response.json";
+					break;
+				}
+				case "Too many related products":
+				{
+					var maxRelatedProducts = 5;
+					var fixture = new Fixture();
+					fixture.RepeatCount = maxRelatedProducts + 1;
+
+					combination.MainProductId = products["Pen"];
+					combination.RelatedProducts = fixture.Create<List<string>>();
+					expectedValidationJson = "create_invalid_combination_too_many_related_response.json";
 					break;
 				}
 			}
